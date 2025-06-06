@@ -117,7 +117,7 @@ const MemeGrid = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://t.me/dimon_coin"
+                href="https://t.me/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full transition-colors"
@@ -125,7 +125,7 @@ const MemeGrid = () => {
                 Share on Telegram
               </a>
               <a
-                href="https://twitter.com/dimon_coin"
+                href="https://x.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition-colors"

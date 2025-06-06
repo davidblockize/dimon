@@ -159,7 +159,7 @@ const Whitepaper = () => {
                 </button>
                 
                 <a
-                  href="https://t.me/dimon_coin"
+                  href="https://t.me/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 text-lg"

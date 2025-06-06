@@ -60,7 +60,7 @@ const Header = () => {
                 <span className="text-sm text-red-300">Whitepaper</span>
               </a>
               <a
-                href="https://t.me/dimon_coin"
+                href="https://t.me/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-blue-400 transition-colors"
@@ -68,7 +68,7 @@ const Header = () => {
                 <MessageCircle className="w-6 h-6" />
               </a>
               <a
-                href="https://twitter.com/dimon_coin"
+                href="https://x.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-blue-400 transition-colors"
@@ -112,7 +112,7 @@ const Header = () => {
                   <span className="text-sm text-gray-300">QR</span>
                 </button>
                 <a
-                  href="https://t.me/dimon_coin"
+                  href="https://t.me/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
@@ -120,7 +120,7 @@ const Header = () => {
                   <MessageCircle className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://twitter.com/dimon_coin"
+                  href="https://x.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-blue-400 transition-colors"

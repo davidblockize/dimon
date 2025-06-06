@@ -24,7 +24,7 @@ const Footer = () => {
             {/* Social Links */}
             <div className="flex space-x-4">
               <a
-                href="https://t.me/dimon_coin"
+                href="https://t.me/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gray-800 hover:bg-blue-600 p-3 rounded-full transition-colors"
@@ -32,7 +32,7 @@ const Footer = () => {
                 <MessageCircle className="w-6 h-6 text-gray-400 hover:text-white" />
               </a>
               <a
-                href="https://twitter.com/dimon_coin"
+                href="https://x.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gray-800 hover:bg-blue-400 p-3 rounded-full transition-colors"
