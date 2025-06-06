@@ -1,0 +1,82 @@
+import React from 'react';
+import { useStats } from '../context/StatsContext';
+import { TrendingUp, Users, Lock, BarChart3 } from 'lucide-react';
+
+const StatsBar = () => {
+  const { stats } = useStats();
+
+  const formatNumber = (num: number) => {
+    if (num >= 1000000) {
+      return `$${(num / 1000000).toFixed(2)}M`;
+    } else if (num >= 1000) {
+      return `$${(num / 1000).toFixed(0)}K`;
+    }
+    return `$${num.toLocaleString()}`;
+  };
+
+  return (
+    <div className="bg-gray-800 border-y border-yellow-500/20 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {/* 24H Volume */}
+          <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700 hover:border-yellow-500/50 transition-colors">
+            <div className="flex items-center space-x-3">
+              <div className="p-2 bg-green-500/20 rounded-lg">
+                <BarChart3 className="w-6 h-6 text-green-400" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-400">24H Volume</p>
+                <p className="text-2xl font-bold text-white">{formatNumber(stats.volume)}</p>
+                <p className="text-xs text-green-400">📈 Growing...</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Holders */}
+          <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700 hover:border-yellow-500/50 transition-colors">
+            <div className="flex items-center space-x-3">
+              <div className="p-2 bg-blue-500/20 rounded-lg">
+                <Users className="w-6 h-6 text-blue-400" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-400">Holders</p>
+                <p className="text-2xl font-bold text-white">{stats.holders.toLocaleString()}</p>
+                <p className="text-xs text-blue-400">🔥 Active</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Liquidity */}
+          <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700 hover:border-yellow-500/50 transition-colors">
+            <div className="flex items-center space-x-3">
+              <div className="p-2 bg-yellow-500/20 rounded-lg">
+                <Lock className="w-6 h-6 text-yellow-400" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-400">Liquidity Locked</p>
+                <p className="text-2xl font-bold text-white">{stats.liquidity}%</p>
+                <p className="text-xs text-yellow-400">🔒 Secure</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Market Cap */}
+          <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700 hover:border-yellow-500/50 transition-colors">
+            <div className="flex items-center space-x-3">
+              <div className="p-2 bg-purple-500/20 rounded-lg">
+                <TrendingUp className="w-6 h-6 text-purple-400" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-400">Market Cap</p>
+                <p className="text-2xl font-bold text-white">{formatNumber(stats.marketCap)}</p>
+                <p className="text-xs text-purple-400">🚀 Mooning</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default StatsBar;
