@@ -93,13 +93,13 @@ const QRCodeGenerator: React.FC<QRCodeGeneratorProps> = ({ onClose }) => {
               <Download className="w-5 h-5" />
               <span>Download</span>
             </button>
-            <button
+            {/* <button
               onClick={shareQR}
               className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2"
             >
               <Share2 className="w-5 h-5" />
               <span>Share</span>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
