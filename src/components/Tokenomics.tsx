@@ -9,7 +9,7 @@ const Tokenomics = () => {
       amount: '950M',
       color: 'from-yellow-400 to-yellow-600',
       icon: Lock,
-      description: 'Locked forever on UniSwap'
+      description: 'Locked forever on PancakeSwap'
     },
     {
       category: 'Marketing',
@@ -34,12 +34,12 @@ const Tokenomics = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">$DIMON</span> Tokenomics
+            Tokenomics That <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Slap</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          {/* <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Fair launch, community-driven, and built to last. 
             No rug pulls, no insider trading - just pure meme magic.
-          </p>
+          </p> */}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -54,27 +54,27 @@ const Tokenomics = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <p className="text-gray-400 text-sm">Total Supply</p>
-                  <p className="text-2xl font-bold text-white">1,000,000,000</p>
-                  <p className="text-yellow-400 text-sm">1 Billion $DIMON</p>
+                  <p className="text-2xl font-bold text-white">1,999,999</p>
+                  <p className="text-yellow-400 text-sm">(one for every Chase customer we’re freeing)</p>
                 </div>
                 
                 <div>
                   <p className="text-gray-400 text-sm">Network</p>
-                  <p className="text-2xl font-bold text-white">Ethereum</p>
-                  <p className="text-blue-400 text-sm">ERC-20 Token</p>
+                  <p className="text-2xl font-bold text-white">BSC</p>
+                  <p className="text-blue-400 text-sm">BSC-20 Token</p>
                 </div>
                 
                 <div>
-                  <p className="text-gray-400 text-sm">Dev Wallet</p>
-                  <p className="text-2xl font-bold text-green-400">0%</p>
-                  <p className="text-green-400 text-sm">Ownership Renounced</p>
+                  {/* <p className="text-gray-400 text-sm">Dev Wallet</p> */}
+                  <p className="text-2xl font-bold text-green-400">💰 LP Burned & Ownership Renounced</p>
+                  <p className="text-green-400 text-sm"> rugproof & Jamie-proof</p>
                 </div>
                 
-                <div>
+                {/* <div>
                   <p className="text-gray-400 text-sm">Liquidity</p>
                   <p className="text-2xl font-bold text-yellow-400">100%</p>
                   <p className="text-yellow-400 text-sm">Locked Forever</p>
-                </div>
+                </div> */}
               </div>
             </div>
 

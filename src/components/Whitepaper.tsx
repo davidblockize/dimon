@@ -18,7 +18,7 @@ const Whitepaper = () => {
             The <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">$DIMON</span> Whitepaper
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            A comprehensive guide to financial revolution, one meme at a time.
+            No roadmap. Only rage. One token to burn the banks.
           </p>
         </div>
 
@@ -34,9 +34,9 @@ const Whitepaper = () => {
                 alt="Dimon Logo"
                 src="/logo.png"
               />
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">$DIMON WHITEPAPER</h1>
-              <p className="text-xl text-gray-600">From Banks to Building Billions</p>
-              <p className="text-sm text-gray-500 mt-2">Version 1.0 | December 2024</p>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">The $DIMON Whitepaper(aka The Roast Report)</h1>
+              <p className="text-xl text-gray-600">“We trust in Dimon’s hate. No roadmap. Only rage.”</p>
+              <p className="text-sm text-gray-500 mt-2">• 1-page satire manifesto</p>
             </div>
 
             <div className="space-y-6 text-gray-800">
@@ -144,7 +144,7 @@ const Whitepaper = () => {
           <div className="text-center">
             <div className="bg-gray-900/50 rounded-2xl p-8 border border-gray-700">
               <FileText className="w-16 h-16 text-yellow-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Download Full Whitepaper</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Download the $DIMON Paper</h3>
               <p className="text-gray-300 mb-6">
                 Get the complete 20-page analysis of how $DIMON will revolutionize finance
               </p>

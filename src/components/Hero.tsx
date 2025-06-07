@@ -28,12 +28,12 @@ const Hero = () => {
 
           {/* Tagline */}
           <p className="text-2xl md:text-3xl text-gray-300 mb-2 font-medium">
-            From Banks to Building Billions
+            Jamie Dimon called crypto worthless... so we named a coin after him.
           </p>
           
           {/* Subtitle */}
           <p className="text-lg md:text-xl text-gray-400 mb-8 max-w-3xl mx-auto">
-            Jamie Dimon called crypto "worthless." We're about to prove him wrong, one moon at a time 🚀
+            He mocked the future. We minted it. $DIMON isn’t just a token — it’s poetic payback. From banks to building billions — one moon at a time.
           </p>
 
           {/* Chase Customer Counter */}
@@ -54,13 +54,13 @@ const Hero = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
-              href="https://app.uniswap.org/#/swap?outputCurrency=0x1234567890abcdef1234567890abcdef12345678"
+              href="https://app.pancakeswap.org/#/swap?outputCurrency=0x1234567890abcdef1234567890abcdef12345678"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center space-x-2 text-lg"
             >
               <Zap className="w-6 h-6" />
-              <span>Buy $DIMON Now</span>
+              <span>Buy $DIMON</span>
               <ArrowRight className="w-6 h-6" />
             </a>
             
@@ -68,7 +68,14 @@ const Hero = () => {
               href="#whitepaper"
               className="border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 text-lg"
             >
-              <span>Read Whitepaper</span>
+              <span>Read the $DIMON Paper</span>
+              <ArrowRight className="w-6 h-6" />
+            </a>
+            <a
+              href="#memes"
+              className="border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 text-lg"
+            >
+              <span>Explore the Meme Gallery</span>
               <ArrowRight className="w-6 h-6" />
             </a>
           </div>

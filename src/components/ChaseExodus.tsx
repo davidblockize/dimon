@@ -42,7 +42,7 @@ const ChaseExodus = () => {
             The Great <span className="text-red-400">Chase Exodus</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Every $DIMON purchase represents one less victim of traditional banking fees and tyranny.
+            Join the rebellion. Exit the matrix. Chase no more — choose $DIMON.
           </p>
         </div>
 
@@ -50,48 +50,48 @@ const ChaseExodus = () => {
           {/* Customers Lost */}
           <div className="bg-red-900/30 rounded-2xl p-8 border border-red-500/50 text-center">
             <TrendingDown className="w-16 h-16 text-red-400 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-white mb-2">Chase Customers Lost</h3>
+            <h3 className="text-2xl font-bold text-white mb-2">🧍‍♂️Chase Customers Lost Today</h3>
             <p className="text-5xl font-bold text-red-400 mb-2">{customersLost.toLocaleString()}</p>
-            <p className="text-gray-400">And counting... 📉</p>
+            {/* <p className="text-gray-400">And counting... 📉</p>
             <div className="mt-4 bg-red-800/30 rounded-lg p-3">
               <p className="text-red-300 text-sm">
                 "I'd rather trust a meme coin than Jamie's overdraft fees"
               </p>
               <p className="text-gray-500 text-xs mt-1">- Anonymous Ex-Chase Customer</p>
-            </div>
+            </div> */}
           </div>
 
           {/* Fees Avoided */}
           <div className="bg-green-900/30 rounded-2xl p-8 border border-green-500/50 text-center">
             <DollarSign className="w-16 h-16 text-green-400 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-white mb-2">Fees Avoided</h3>
+            <h3 className="text-2xl font-bold text-white mb-2">💸 Paper Handed</h3>
             <p className="text-5xl font-bold text-green-400 mb-2">${feesAvoided.toLocaleString()}</p>
-            <p className="text-gray-400">Saved from overdrafts 💰</p>
-            <div className="mt-4 bg-green-800/30 rounded-lg p-3">
+            {/* <p className="text-gray-400">Saved from overdrafts 💰</p> */}
+            {/* <div className="mt-4 bg-green-800/30 rounded-lg p-3">
               <p className="text-green-300 text-sm">
                 Average Chase customer pays $329/year in fees
               </p>
               <p className="text-gray-500 text-xs mt-1">$DIMON holders pay: $0</p>
-            </div>
+            </div> */}
           </div>
 
           {/* New $DIMON Holders */}
           <div className="bg-yellow-900/30 rounded-2xl p-8 border border-yellow-500/50 text-center">
             <Users className="w-16 h-16 text-yellow-400 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-white mb-2">New $DIMON Holders</h3>
+            <h3 className="text-2xl font-bold text-white mb-2">🚪 Your Exodus Block</h3>
             <p className="text-5xl font-bold text-yellow-400 mb-2">{Math.floor(customersLost * 0.7).toLocaleString()}</p>
-            <p className="text-gray-400">Freedom fighters 🚀</p>
-            <div className="mt-4 bg-yellow-800/30 rounded-lg p-3">
+            {/* <p className="text-gray-400">Freedom fighters 🚀</p> */}
+            {/* <div className="mt-4 bg-yellow-800/30 rounded-lg p-3">
               <p className="text-yellow-300 text-sm">
                 70% conversion rate from Chase refugees
               </p>
               <p className="text-gray-500 text-xs mt-1">Welcome to financial freedom!</p>
-            </div>
+            </div> */}
           </div>
         </div>
 
         {/* Comparison Table */}
-        <div className="bg-gray-900/50 rounded-2xl p-8 border border-gray-700 mb-8">
+        {/* <div className="bg-gray-900/50 rounded-2xl p-8 border border-gray-700 mb-8">
           <h3 className="text-3xl font-bold text-white mb-8 text-center">Chase vs $DIMON: The Truth</h3>
           
           <div className="overflow-x-auto">
@@ -137,7 +137,7 @@ const ChaseExodus = () => {
               </tbody>
             </table>
           </div>
-        </div>
+        </div> */}
 
         {/* Call to Action */}
         <div className="text-center">
@@ -148,7 +148,7 @@ const ChaseExodus = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://app.uniswap.org/#/swap?outputCurrency=0x1234567890abcdef1234567890abcdef12345678"
+                href="https://app.pancakeswap.org/#/swap?outputCurrency=0x1234567890abcdef1234567890abcdef12345678"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2 text-lg"

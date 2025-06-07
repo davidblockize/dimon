@@ -5,29 +5,36 @@ const HowToBuy = () => {
   const steps = [
     {
       step: 1,
-      title: 'Get a Wallet',
-      description: 'Download MetaMask or any Ethereum wallet',
+      title: 'Get a Wallet (MetaMask or Trust Wallet)',
+      // description: 'Download MetaMask or any Ethereum wallet',
       icon: Wallet,
       color: 'from-blue-400 to-blue-600'
     },
     {
       step: 2,
-      title: 'Buy ETH',
-      description: 'Purchase Ethereum on any exchange',
+      title: 'Buy BNB',
+      // description: 'Purchase Ethereum on any exchange',
       icon: Zap,
       color: 'from-green-400 to-green-600'
     },
     {
       step: 3,
-      title: 'Connect to UniSwap',
-      description: 'Visit app.uniswap.org and connect wallet',
+      title: 'Connect to PancakeSwap',
+      // description: 'Visit app.pancakeswap.org and connect wallet',
       icon: ArrowRight,
       color: 'from-purple-400 to-purple-600'
     },
     {
       step: 4,
-      title: 'Swap for $DIMON',
-      description: 'Enter contract address and swap ETH for $DIMON',
+      title: 'Swap BNB for $DIMON',
+      // description: 'Enter contract address and swap ETH for $DIMON',
+      icon: Shield,
+      color: 'from-yellow-400 to-yellow-600'
+    },
+    {
+      step: 5,
+      title: 'Laugh at JPMorgan',
+      // description: 'Enter contract address and swap ETH for $DIMON',
       icon: Shield,
       color: 'from-yellow-400 to-yellow-600'
     }
@@ -38,11 +45,12 @@ const HowToBuy = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            How to Buy <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">$DIMON</span>
+            How to Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">$DIMON </span>
+            Rebellion
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Follow these simple steps to join the $DIMON revolution and prove Jamie wrong!
-          </p>
+          {/* <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            How to Join the $DIMON Rebellion
+          </p> */}
         </div>
 
         {/* Steps */}
@@ -57,7 +65,6 @@ const HowToBuy = () => {
                 <div className="text-center">
                   <div className="text-sm text-gray-400 mb-2">Step {step.step}</div>
                   <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
-                  <p className="text-gray-300 text-sm">{step.description}</p>
                 </div>
               </div>
               
@@ -89,13 +96,13 @@ const HowToBuy = () => {
         {/* Quick Actions */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="https://app.uniswap.org/#/swap?outputCurrency=0x1234567890abcdef1234567890abcdef12345678"
+            href="https://app.pancakeswap.org/#/swap?outputCurrency=0x1234567890abcdef1234567890abcdef12345678"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2 text-lg"
           >
             <Zap className="w-6 h-6" />
-            <span>Buy on UniSwap</span>
+            <span>Buy on PancakeSwap</span>
           </a>
           
           <a

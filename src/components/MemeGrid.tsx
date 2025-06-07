@@ -64,10 +64,11 @@ const MemeGrid = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Meme <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Gallery</span>
+            Meme <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Gallery </span>
+            - Where the bank jokes print faster than fiat.
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            The best $DIMON vs Chase Bank memes from our community. Because every revolution needs its laughs!
+            Scroll through. Save your faves. Share the pain of a collapsing fiat system.
           </p>
         </div>
 
