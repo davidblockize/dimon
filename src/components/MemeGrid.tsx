@@ -5,55 +5,55 @@ const MemeGrid = () => {
   const memes = [
     {
       id: 1,
-      url: '/dimen_1.png',
+      url: '/dimon_1.png',
       title: 'Jamie vs Crypto',
       description: 'When he said Bitcoin is fraud but $DIMON hits ATH'
     },
     {
       id: 2,
-      url: '/dimen_2.png',
+      url: '/dimon_2.png',
       title: 'Chase Overdraft Fees',
       description: '$35 overdraft vs $0 $DIMON transactions'
     },
     {
       id: 3,
-      url: '/dimen_3.png',
+      url: '/dimon_3.png',
       title: 'Banking vs DeFi',
       description: '0.01% savings rate vs ∞% moon potential'
     },
     {
       id: 4,
-      url: '/dimen_4.png',
+      url: '/dimon_4.png',
       title: 'Crypto is Worthless',
       description: '$DIMON holders: Hold my beer 🍺'
     },
     {
       id: 5,
-      url: '/dimen_1.png',
+      url: '/dimon_1.png',
       title: 'CEO Salary Comparison',
       description: 'Jamie: $34M/year | $DIMON Dev: $0 (renounced)'
     },
     {
       id: 6,
-      url: '/dimen_2.png',
+      url: '/dimon_2.png',
       title: 'The Great Exodus',
       description: 'Chase customers fleeing to $DIMON daily'
     },
     {
       id: 7,
-      url: '/dimen_3.png',
+      url: '/dimon_3.png',
       title: 'JPM Coin Hypocrisy',
       description: 'Crypto is worthless... launches JPM Coin 🤔'
     },
     {
       id: 8,
-      url: '/dimen_4.png',
+      url: '/dimon_4.png',
       title: 'Diamond Hands vs Bank Fees',
       description: 'HODLing $DIMON > Paying Chase fees'
     },
     {
       id: 9,
-      url: '/dimen_1.png',
+      url: '/dimon_1.png',
       title: 'Financial Freedom',
       description: 'From bank slave to $DIMON millionaire'
     }

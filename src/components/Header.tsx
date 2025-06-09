@@ -23,12 +23,12 @@ const Header = () => {
                 alt="Dimon Logo"
                 src="/logo.png"
               />
-              <span className="text-white font-bold text-xl">DIMON</span>
+              <span className="text-white font-bold text-xl">$DIMON</span>
             </div>
             
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden md:flex items-center md:space-x-8">
               <a href="#what-is" className="text-gray-300 hover:text-yellow-400 transition-colors">What is $DIMON?</a>
               <a href="#whitepaper" className="text-gray-300 hover:text-yellow-400 transition-colors">Whitepaper</a>
               <a href="#tokenomics" className="text-gray-300 hover:text-yellow-400 transition-colors">Tokenomics</a>
