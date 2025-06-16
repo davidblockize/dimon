@@ -42,7 +42,7 @@ const HowToBuy = () => {
 
   return (
     <section id="how-to-buy" className="py-20 px-4 sm:px-6 lg:px-8 bg-white text-black">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-8xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             How to Join the $DIMON Rebellion
@@ -53,7 +53,7 @@ const HowToBuy = () => {
         </div>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="flex flex-wrap justify-center gap-8 mb-12">
           {steps.map((step, index) => (
             <div key={index} className="relative">
               <div className="rounded-2xl p-6 border border-gray-500/50 transition-all duration-300 hover:transform hover:scale-105 w-[232px] h-full">
