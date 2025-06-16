@@ -27,7 +27,7 @@ import { StatsProvider } from './context/StatsContext';
 import PresaleCard from './components/PresaleCard';
 
 const config = getDefaultConfig({
-  appName: 'My RainbowKit App',
+  appName: 'DimonPresale',
   projectId: 'YOUR_PROJECT_ID',
   chains: [bscTestnet],
   ssr: true, // If your dApp uses server side rendering (SSR)

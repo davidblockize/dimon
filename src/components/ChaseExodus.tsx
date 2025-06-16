@@ -35,23 +35,23 @@ const ChaseExodus = () => {
   }, [customersLost, feesAvoided]);
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-red-900/20 to-gray-900/20">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white text-black">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            The Great <span className="text-red-400">Chase Exodus</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            The Great Chase Exodus
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl max-w-3xl mx-auto">
             Join the rebellion. Exit the matrix. Chase no more — choose $DIMON.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {/* Customers Lost */}
-          <div className="bg-red-900/30 rounded-2xl p-8 border border-red-500/50 text-center">
-            <TrendingDown className="w-16 h-16 text-red-400 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-white mb-2">🧍‍♂️Chase Customers Lost Today</h3>
-            <p className="text-5xl font-bold text-red-400 mb-2">{customersLost.toLocaleString()}</p>
+          <div className="p-8 text-center">
+            <TrendingDown className="w-16 h-16 text-red-500 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold mb-2">🧍‍♂️Chase Customers Lost Today</h3>
+            <p className="text-5xl font-bold mb-2">{customersLost.toLocaleString()}</p>
             {/* <p className="text-gray-400">And counting... 📉</p>
             <div className="mt-4 bg-red-800/30 rounded-lg p-3">
               <p className="text-red-300 text-sm">
@@ -62,10 +62,10 @@ const ChaseExodus = () => {
           </div>
 
           {/* Fees Avoided */}
-          <div className="bg-green-900/30 rounded-2xl p-8 border border-green-500/50 text-center">
-            <DollarSign className="w-16 h-16 text-green-400 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-white mb-2">💸 Paper Handed</h3>
-            <p className="text-5xl font-bold text-green-400 mb-2">${feesAvoided.toLocaleString()}</p>
+          <div className="p-8 text-center">
+            <DollarSign className="w-16 h-16 text-green-500 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold mb-2">💸 Paper Handed</h3>
+            <p className="text-5xl font-bold mb-2">${feesAvoided.toLocaleString()}</p>
             {/* <p className="text-gray-400">Saved from overdrafts 💰</p> */}
             {/* <div className="mt-4 bg-green-800/30 rounded-lg p-3">
               <p className="text-green-300 text-sm">
@@ -76,10 +76,10 @@ const ChaseExodus = () => {
           </div>
 
           {/* New $DIMON Holders */}
-          <div className="bg-yellow-900/30 rounded-2xl p-8 border border-yellow-500/50 text-center">
-            <Users className="w-16 h-16 text-yellow-400 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-white mb-2">🚪 Your Exodus Block</h3>
-            <p className="text-5xl font-bold text-yellow-400 mb-2">{Math.floor(customersLost * 0.7).toLocaleString()}</p>
+          <div className="p-8 text-center">
+            <Users className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold mb-2">🚪 Your Exodus Block</h3>
+            <p className="text-5xl font-bold mb-2">{Math.floor(customersLost * 0.7).toLocaleString()}</p>
             {/* <p className="text-gray-400">Freedom fighters 🚀</p> */}
             {/* <div className="mt-4 bg-yellow-800/30 rounded-lg p-3">
               <p className="text-yellow-300 text-sm">
@@ -141,26 +141,27 @@ const ChaseExodus = () => {
 
         {/* Call to Action */}
         <div className="text-center">
-          <div className="bg-gradient-to-r from-yellow-400/20 to-red-400/20 rounded-2xl p-8 border border-yellow-500/30">
-            <h3 className="text-3xl font-bold text-white mb-4">Join the Exodus</h3>
-            <p className="text-xl text-gray-300 mb-6">
+          <div className="rounded-2xl p-8 border border-gray-500/50">
+            <h3 className="text-3xl font-bold mb-4">Join the Exodus</h3>
+            <p className="text-xl mb-6">
               Be part of the movement that's proving Jamie Dimon wrong, one transaction at a time.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-7 justify-center">
               <a
                 href="https://app.pancakeswap.org/#/swap?outputCurrency=0x1234567890abcdef1234567890abcdef12345678"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2 text-lg"
+                // className="font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2 text-lg"
+                className="space-x-2 bg-[#005FF0] hover:bg-[#005FF0eF] px-3 py-2 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center text-md justify-center"
               >
                 <span>Escape Chase Now</span>
-                <ArrowRight className="w-6 h-6" />
+                {/* <ArrowRight className="w-6 h-6" /> */}
               </a>
               <a
                 href="https://t.me/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-2 border-red-400 text-red-400 hover:bg-red-400 hover:text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 text-lg"
+                className="border border-[#005FF0] text-[#005FF0] hover:text-[#005FF0eF] font-bold px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 text-md justify-center"
               >
                 <span>Share Your Chase Horror Story</span>
               </a>

@@ -11,13 +11,13 @@ const Whitepaper = () => {
   };
 
   return (
-    <section id="whitepaper" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-800/30">
+    <section id="whitepaper" className="py-20 px-4 sm:px-6 lg:px-8 bg-white text-black">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            The <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">$DIMON</span> Whitepaper
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            The $DIMON Whitepaper
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl max-w-3xl mx-auto">
             No roadmap. Only rage. One token to burn the banks.
           </p>
         </div>
@@ -142,17 +142,17 @@ const Whitepaper = () => {
 
           {/* Download Section */}
           <div className="text-center">
-            <div className="bg-gray-900/50 rounded-2xl p-8 border border-gray-700">
-              <FileText className="w-16 h-16 text-yellow-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Download the $DIMON Paper</h3>
-              <p className="text-gray-300 mb-6">
+            <div className="rounded-2xl p-8 border border-gray-500/50">
+              {/* <FileText className="w-16 h-16 text-yellow-400 mx-auto mb-4" /> */}
+              <h3 className="text-2xl font-bold mb-4">Download the $DIMON Paper</h3>
+              <p className="mb-6">
                 Get the complete 20-page analysis of how $DIMON will revolutionize finance
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-7 justify-center">
                 <button
                   onClick={downloadWhitepaper}
-                  className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2 text-lg"
+                  className="space-x-2 bg-[#005FF0] hover:bg-[#005FF0eF] px-3 py-2 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center text-md justify-center"
                 >
                   <Download className="w-6 h-6" />
                   <span>Download PDF</span>
@@ -162,7 +162,7 @@ const Whitepaper = () => {
                   href="https://t.me/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900 font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 text-lg"
+                  className="border border-[#005FF0] text-[#005FF0] hover:text-[#005FF0eF] font-bold px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 text-md justify-center"
                 >
                   <ExternalLink className="w-6 h-6" />
                   <span>Discuss on Telegram</span>

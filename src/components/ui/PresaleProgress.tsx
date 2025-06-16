@@ -35,7 +35,7 @@ const PresaleProgress: React.FC<PresaleProgressProps> = ({
     <div className="flex flex-col items-center w-full space-y-2">
       <div className="relative w-full h-8 rounded bg-white">
         <div 
-            className="absolute h-full bg-gradient-to-r rounded from-white to-[#a3ff12]"
+            className="absolute h-full bg-gradient-to-r rounded from-white to-[#a3ff12] border border-solid border-gray-500/50"
             style={{ width: `${soldPercent}%`, boxShadow: '0 2px 10.5px #f9ff38' }}
         >
             <div className="absolute inset-0 rounded bg-[#a3ff12] animate-pulse"></div>
@@ -54,8 +54,8 @@ const PresaleProgress: React.FC<PresaleProgressProps> = ({
       </div>
       
       <div className="flex flex-col items-center text-center space-y-1">
-        <p className="text-sm text-gray-300">USD RAISED : ${totalRaisedAmount.toLocaleString()} / ${hardcapUsd.toLocaleString()}</p>
-        <p className="text-sm text-gray-300">Tokens Sold : {tokensSoldAmount.toLocaleString()}</p>
+        <p className="text-sm text-black">USD RAISED : ${totalRaisedAmount.toLocaleString()} / ${hardcapUsd.toLocaleString()}</p>
+        <p className="text-sm text-black">Tokens Sold : {tokensSoldAmount.toLocaleString()}</p>
       </div>
     </div>
   );

@@ -439,18 +439,18 @@ const PresaleCard = (): JSX.Element => {
 
 
   return (
-    <section className="flex flex-col items-center pb-24 w-full">
+    <section className="flex flex-col items-center pt-5 pb-24 w-full bg-white">
       <div className="relative max-w-[1200px] w-full">
         <div className="flex flex-wrap justify-center gap-8 mt-16">
           {/* Emperor Access Key Card */}
-          <Card className="w-[95%] sm:w-[556px] border border-solid border-[#141625] shadow-[0px_0px_30px_#a3ff12] [background:linear-gradient(143deg,rgba(7,5,18,1)_0%,rgba(4,5,16,1)_100%)] rounded-xl relative">
+          <Card className="w-[95%] sm:w-[556px] border border-solid border-gray-500/50 bg-white rounded-xl relative">
             <CardContent className="p-8 flex flex-col items-center">
               <h2
-                className="w-80 mx-auto [background:linear-gradient(90deg,rgba(163,255,18,1)_0%,rgba(197,255,107,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] [font-family:'Arial-Bold',Helvetica] font-bold text-transparent text-[40px] text-center tracking-[0] leading-[48px] whitespace-nowrap"
+                className="w-80 mx-auto font-bold text-black text-[40px] text-center tracking-[0] leading-[48px] whitespace-nowrap"
                 style={{
                   WebkitBackgroundClip: "text",
                   backgroundClip: "text",
-                  WebkitTextFillColor: "transparent"
+                  WebkitTextFillColor: "black"
                 }}
               >
                 Presale Live
@@ -488,13 +488,13 @@ const PresaleCard = (): JSX.Element => {
                     <div className="flex flex-col w-full space-y-2">
                       <div className="flex justify-between w-full gap-3 items-end">
                         <div className="flex flex-col relative">
-                          <span className="text-gray-300 mb-1">{payment.symbol} you pay</span>
+                          <span className="text-black mb-1">{payment.symbol} you pay</span>
                           <div className="flex-1 relative">
                             <input
                               type="number"
                               value={payAmount}
                               onChange={handlePayChange}
-                              className="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 pl-3 pr-3 text-white focus:outline-none focus:ring-1 focus:ring-yellow-400/50"
+                              className="w-full bg-white border border-gray-500/50 rounded-lg py-3 pl-3 pr-3 text-black focus:outline-none focus:ring-1 focus:ring-[#005FF0]"
                             />
                             <div className="absolute inset-y-0 right-8 flex items-center pl-3 pointer-events-none">
                               {/* <img src={`/${selectedPayment}.png`} alt="bnb" className="rounded-full" /> */}
@@ -507,13 +507,13 @@ const PresaleCard = (): JSX.Element => {
                         </div>
                         
                         <div className="flex flex-col relative">
-                          <span className="text-gray-300 mb-1">$DIMON you receive</span>
+                          <span className="text-black mb-1">$DIMON you receive</span>
                           <div className="flex-1 relative">
                             <input
                               type="number"
                               value={receiveAmount}
                               readOnly
-                              className="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 pl-3 pr-3 text-white focus:outline-none"
+                              className="w-full border-gray-500/50 border rounded-lg py-3 pl-3 pr-3 text-black focus:outline-none"
                             />
                             <div className="absolute inset-y-0 right-8 flex items-center pl-3 pointer-events-none">
                               <img src={`/dimon.png`} alt="dimon" className="rounded-full" width={36} height={36} />
@@ -523,16 +523,16 @@ const PresaleCard = (): JSX.Element => {
                       </div>
                     </div>
 
-                    <button type='button' className="bg-[#a3ff12] hover:bg-[#a3ff12]/90 text-[#040510] [font-family:'Arial-Bold',Helvetica] rounded-md py-2 text-base font-bold mt-2" onClick={onTrade}>BUY</button>
+                    <button type='button' className="bg-[#005FF0] hover:bg-[#005FF0]/90 text-white rounded-md py-2 text-base font-bold mt-2" onClick={onTrade}>BUY</button>
                   </>
 
                 ) : (
-                  <button className="w-full bg-[#a3ff12] hover:bg-[#8fe00f] text-[#040510] [font-family:'Arial-Bold',Helvetica] font-bold text-base md:text-[17.6px] px-6 md:px-8 py-2 rounded" onClick={onClaimToken}>
+                  <button className="w-full bg-[#005FF0] hover:bg-[#005FF0]/90 text-white font-bold text-base md:text-[17.6px] px-6 md:px-8 py-2 rounded" onClick={onClaimToken}>
                     Claim Token
                   </button>
                 )}
                 
-                <div className="text-white">
+                <div className="text-black self-center">
                   Your Token Amount: {buyTokenAmount.toFixed(3)} $DIMON
                 </div>
 
@@ -540,14 +540,14 @@ const PresaleCard = (): JSX.Element => {
                   <>
                     <div className="flex justify-between w-full gap-3 mt-8 md:mt-10">
                       <Button
-                        className="w-full bg-[#a3ff12] hover:bg-[#8fe00f] text-[#040510] [font-family:'Arial-Bold',Helvetica] font-bold text-base md:text-[17.6px] px-6 md:px-8 py-3 md:py-4 rounded"
+                        className="w-full bg-[#a3ff12] hover:bg-[#8fe00f] text-white font-bold text-base md:text-[17.6px] px-6 md:px-8 py-3 md:py-4 rounded"
                         onClick={onCreatePresale}
                       >
                         Create Presale
                       </Button>
               
                       <Button
-                        className="w-full bg-[#a3ff12] hover:bg-[#8fe00f] text-[#040510] [font-family:'Arial-Bold',Helvetica] font-bold text-base md:text-[17.6px] px-6 md:px-8 py-3 md:py-4 rounded"
+                        className="w-full bg-[#a3ff12] hover:bg-[#8fe00f] text-white font-bold text-base md:text-[17.6px] px-6 md:px-8 py-3 md:py-4 rounded"
                         onClick={onUpdatePresale}
                       >
                         Update Presale
@@ -562,7 +562,7 @@ const PresaleCard = (): JSX.Element => {
                         className="w-full bg-gray-800 border border-gray-700 rounded pl-3 pr-3 text-white focus:outline-none focus:ring-1 focus:ring-yellow-400/50"
                       />
                       <Button
-                        className="w-full bg-[#a3ff12] hover:bg-[#8fe00f] text-[#040510] [font-family:'Arial-Bold',Helvetica] font-bold text-base md:text-[17.6px] px-6 md:px-8 py-3 md:py-4 rounded"
+                        className="w-full bg-[#a3ff12] hover:bg-[#8fe00f] text-white font-bold text-base md:text-[17.6px] px-6 md:px-8 py-3 md:py-4 rounded"
                         onClick={onDepositToken}
                       >
                         Deposit Token
@@ -570,7 +570,7 @@ const PresaleCard = (): JSX.Element => {
                     </div>
                     
                     <Button
-                      className="bg-[#a3ff12] hover:bg-[#8fe00f] text-[#040510] [font-family:'Arial-Bold',Helvetica] font-bold text-base md:text-[17.6px] px-6 md:px-8 py-3 md:py-4 rounded"
+                      className="bg-[#a3ff12] hover:bg-[#8fe00f] text-white font-bold text-base md:text-[17.6px] px-6 md:px-8 py-3 md:py-4 rounded"
                       onClick={onWithdrawToken}
                     >
                       Withdraw Token

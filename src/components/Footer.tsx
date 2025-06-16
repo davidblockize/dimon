@@ -3,7 +3,7 @@ import { Twitter, MessageCircle, Globe, Shield, Lock, Zap } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 border-t border-gray-800 py-16 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#ECEFF1] border-t border-gray-500/50 py-10 md:py-16 px-4 sm:px-6 lg:px-8 text-black">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Logo & Description */}
@@ -14,12 +14,12 @@ const Footer = () => {
                 alt="Dimon Logo"
                 src="/logo.png"
               />
-              <span className="text-white font-bold text-xl">DIMON</span>
+              <span className="font-bold text-xl">DIMON</span>
             </div>
-            <p className="text-gray-400 mb-2 max-w-md">
+            <p className="mb-2 max-w-md">
               • “Not Financial Advice. Just Financial Revenge.”
             </p>
-            <p className="text-gray-400 mb-6 max-w-md">
+            <p className="mb-6 max-w-md">
               • 💥 Powered by the rage of 1,999,999 former Chase customers.
             </p>
             
@@ -97,45 +97,41 @@ const Footer = () => {
           </div> */}
         </div>
 
-        <div className='flex items-center justify-between'>
-          <div className="flex space-x-4">
+        <div className='flex flex-col sm:flex-row items-center justify-between space-y-5 sm:space-y-0'>
+          <div className="flex space-x-2 sm:space-x-4">
             <a
               href="https://x.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400"
             >
               Twitter
             </a>
-            <p className='text-gray-400'>|</p>
+            <p>|</p>
             <a
               href="https://t.me/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400"
             >
               Telegram
             </a>
-            <p className='text-gray-400'>|</p>
+            <p>|</p>
             <a
               href="#"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400"
             >
               Whitepaper
             </a>
-            <p className='text-gray-400'>|</p>
+            <p>|</p>
             <a
               href="#"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400"
             >
               Meme Pack
             </a>
           </div>
-          <div className="text-gray-400 text-sm mb-4 md:mb-0">
+          <div className="text-sm mb-4 md:mb-0">
             <p>© 2025 $DIMON. All rights reserved.</p>
           </div>
         </div>

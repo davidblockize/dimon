@@ -20,8 +20,8 @@ const connectors = connectorsForWallets(
     },
   ],
   {
-    appName: "PenguinPresale",
-    projectId: "7c478498b3bd9f4248f866d080ebb208",
+    appName: "DimonPresale",
+    projectId: "293a761c6f1f8691938d803059c73e54",
   }
 )
 

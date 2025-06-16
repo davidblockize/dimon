@@ -60,14 +60,13 @@ const MemeGrid = () => {
   ];
 
   return (
-    <section id="memes" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-800/30">
+    <section id="memes" className="py-20 px-4 sm:px-6 lg:px-8 bg-white text-black">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Meme <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Gallery </span>
-            - Where the bank jokes print faster than fiat.
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Meme Gallery - Where the bank jokes print faster than fiat.
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl max-w-3xl mx-auto">
             Scroll through. Save your faves. Share the pain of a collapsing fiat system.
           </p>
         </div>
@@ -75,8 +74,8 @@ const MemeGrid = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {memes.map((meme, index) => (
             <div key={meme.id} className="group cursor-pointer">
-              <div className="bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-700 hover:border-yellow-500/50 transition-all duration-300 transform hover:scale-105">
-                <div className="aspect-square bg-gray-800 flex items-center justify-center overflow-hidden">
+              <div className="rounded-2xl overflow-hidden border border-gray-500/50 transition-all duration-300 transform hover:scale-105">
+                <div className="aspect-square flex items-center justify-center overflow-hidden">
                   <img 
                     src={meme.url} 
                     alt={meme.title}
@@ -87,9 +86,9 @@ const MemeGrid = () => {
                       const parent = target.parentElement;
                       if (parent) {
                         parent.innerHTML = `
-                          <div class="flex flex-col items-center justify-center h-full text-gray-400">
-                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 flex items-center justify-center mb-4">
-                              <span class="text-gray-900 font-bold text-2xl">$</span>
+                          <div class="flex flex-col items-center justify-center h-full">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                              <span class="font-bold text-2xl">$</span>
                             </div>
                             <p class="text-sm text-center px-4">${meme.title}</p>
                           </div>
@@ -100,8 +99,8 @@ const MemeGrid = () => {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-lg font-bold text-white mb-2">{meme.title}</h3>
-                  <p className="text-gray-400 text-sm">{meme.description}</p>
+                  <h3 className="text-lg font-bold mb-2">{meme.title}</h3>
+                  <p className="text-sm">{meme.description}</p>
                 </div>
               </div>
             </div>
@@ -110,18 +109,18 @@ const MemeGrid = () => {
 
         {/* Call to Action */}
         <div className="text-center mt-12">
-          <div className="bg-gradient-to-r from-yellow-400/20 to-red-400/20 rounded-2xl p-8 border border-yellow-500/30">
-            <Zap className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-white mb-4">Got a $DIMON vs Chase Meme?</h3>
-            <p className="text-gray-300 mb-6">
+          <div className="rounded-2xl p-8 border border-gray-500/50">
+            <Zap className="w-12 h-12 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold mb-4">Got a $DIMON vs Chase Meme?</h3>
+            <p className="mb-6">
               Share your best anti-banking, pro-$DIMON memes with the community!
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-7 justify-center">
               <a
                 href="https://t.me/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full transition-colors"
+                className="space-x-2 bg-[#005FF0] hover:bg-[#005FF0eF] px-3 py-2 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center text-md justify-center"
               >
                 Share on Telegram
               </a>
@@ -129,7 +128,7 @@ const MemeGrid = () => {
                 href="https://x.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition-colors"
+                className="border border-[#005FF0] text-[#005FF0] hover:text-[#005FF0eF] font-bold px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 text-md justify-center"
               >
                 Share on X
               </a>
