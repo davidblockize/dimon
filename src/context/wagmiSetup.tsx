@@ -44,8 +44,8 @@ const connectors = connectorsForWallets(
 // })
 
 export const config = getDefaultConfig({
-  appName: "DirhamXstaking",
-  projectId: "7c478498b3bd9f4248f866d080ebb208",
+  appName: "DimonPresale",
+  projectId: "293a761c6f1f8691938d803059c73e54",
   chains: [bscTestnet], //monda
   transports: {
     [bscTestnet.id]: http("https://bnb-testnet.g.alchemy.com/v2/jZMYGhxXdn2G9vVQpe2gpLTjRdEQRTLK"),

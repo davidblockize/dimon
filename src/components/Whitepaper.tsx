@@ -80,7 +80,7 @@ const Whitepaper = () => {
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <p className="font-bold">Total Supply:</p>
-                      <p>1,000,000,000 $DIMON</p>
+                      <p>119,000,000 $DIMON</p>
                     </div>
                     <div>
                       <p className="font-bold">Liquidity Pool:</p>

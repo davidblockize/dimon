@@ -54,7 +54,7 @@ const Tokenomics = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <p className="text-sm">Total Supply</p>
-                  <p className="text-2xl font-bold">1,999,999</p>
+                  <p className="text-2xl font-bold">119,999,999</p>
                   <p className="text-sm">(one for every Chase customer we’re freeing)</p>
                 </div>
                 

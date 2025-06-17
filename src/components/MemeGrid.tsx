@@ -71,10 +71,10 @@ const MemeGrid = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-32 gap-y-8">
           {memes.map((meme, index) => (
             <div key={meme.id} className="group cursor-pointer">
-              <div className="rounded-2xl overflow-hidden border border-gray-500/50 transition-all duration-300 transform hover:scale-105">
+              <div className="rounded-2xl overflow-hidden border border-gray-500/50 transition-all duration-300 transform hover:scale-105 min-h-[453px]">
                 <div className="aspect-square flex items-center justify-center overflow-hidden">
                   <img 
                     src={meme.url} 
