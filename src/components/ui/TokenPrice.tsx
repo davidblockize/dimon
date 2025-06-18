@@ -12,11 +12,11 @@ const TokenPrice: React.FC<TokenPriceProps> = ({ currentPrice, nextPrice, symbol
       <div className="flex items-center space-x-2">
         <span className="text-black font-medium">1 {symbol} = </span>
         {/* <span className="text-green-400 font-semibold">${currentPrice}</span> */}
-        <span className="text-black font-semibold">$ 0.00005</span>
+        <span className="text-black font-semibold">$ 0.0006</span>
       </div>
       <div className="flex items-center">
         {/* <span className="text-yellow-400 font-medium">Next Price: ${nextPrice}</span> */}
-        <span className="text-black font-medium">Listing Price: $ 0.00006</span>
+        <span className="text-black font-medium">Listing Price: $ 0.0007</span>
       </div>
     </div>
   );

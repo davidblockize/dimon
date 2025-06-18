@@ -46,9 +46,9 @@ const connectors = connectorsForWallets(
 export const config = getDefaultConfig({
   appName: "DimonPresale",
   projectId: "293a761c6f1f8691938d803059c73e54",
-  chains: [bscTestnet], //monda
+  chains: [bscTestnet],
   transports: {
-    [bscTestnet.id]: http("https://bnb-testnet.g.alchemy.com/v2/jZMYGhxXdn2G9vVQpe2gpLTjRdEQRTLK"),
+    [bscTestnet.id]: http("https://bnb-testnet.g.alchemy.com/v2/jJYJsns9CjkrmyIEsM2859AbB-d2cevE"),
   },
   ssr: true,
   storage: createStorage({

@@ -6,16 +6,19 @@ import { toast } from "react-toastify";
 import { waitForTransactionReceipt, writeContract, readContract } from "@wagmi/core"
 import { parseEther, parseUnits, createPublicClient, createWalletClient, Chain, erc20Abi } from "viem"
 import { config } from "../context/wagmiSetup";
-import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from 'wagmi'
+import { useAccount, useDisconnect, useEnsAvatar, useEnsName, useWriteContract } from 'wagmi'
 // import { useContract } from "../../../../contexts/ContractContext";
 // import { TOKEN_DECIMALS } from "../../../../engine/consts";
-// import { send, fetchSOLPrice } from "../../../../engine/utils";
+// import { send, fetchBNBPrice } from "../../../../engine/utils";
 // import { connection } from "../../../../engine/config";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import TokenPrice from "./ui/TokenPrice";
 import PresaleProgress from "./ui/PresaleProgress";
 import PaymentOptions from "./ui/PaymentOptions";
+import { ABI } from "../idl/idl";
+import { contracts } from '../constants/contracts'
+import { ConnectButton } from "./ui/connectButton";
 
 const TokenIcon = () => (
   <span className="text-yellow-300 font-bold flex items-center justify-center w-6 h-6">
@@ -54,14 +57,17 @@ const PresaleCard = (): JSX.Element => {
   const currentPrice = import.meta.env.VITE_PRESALE_PRICE_PER_TOKEN;
   const nextPrice = import.meta.env.VITE_PRESALE_PRICE_PER_TOKEN_NEXT;
 
-   const { address } = useAccount()
+
+  const { address, isConnected } = useAccount()
+  const { writeContractAsync } = useWriteContract();
+
 
 //   const walletCtx = useAnchorWallet();
 //   const { buySol, buyUsdc, buyUsdt, createPresale, updatePresale, depositToken, claimToken, withdrawToken, getPresaleInfo, getUserInfo } = useContract() as ContractContextType;
 
   const [amount, setAmount] = useState<string | ''>('');
-  const [payAmount, setPayAmount] = useState<string>('1');
-  const [receiveAmount, setReceiveAmount] = useState<string>('1.5');
+  const [payAmount, setPayAmount] = useState<string>('0');
+  const [receiveAmount, setReceiveAmount] = useState<string>('0');
   const [depositTokenAmount, setDepositTokenAmount] = useState<string>('0');
 
   const [selectedPayment, setSelectedPayment] = useState('bnb');
@@ -69,7 +75,13 @@ const PresaleCard = (): JSX.Element => {
   const [userInfo, setUserInfo] = useState<any>(null);
   const [claimEnable, setClaimEnable] = useState(false);
   const [buyTokenAmount, setBuyTokenAmount] = useState(0);
-  
+
+  const [usdRasiedAmount, setUsdRaisedAmount] = useState(0);
+  const [tokenSoldAmount, setTokenSoldAmount] = useState(0);
+  const [tokenBalanceAmount, setTokenBalance] = useState(0);
+  // const [bnbPrice, setBnbPrice] = useState(0);
+  const [status, setStatus] = useState(false);
+
   const paymentOptions = [
     { 
       id: 'bnb', 
@@ -93,41 +105,97 @@ const PresaleCard = (): JSX.Element => {
     }
   ];
 
-//   useEffect(() => {
-//     const fetchPresaleInfo = async () => {
-//       if (walletCtx?.publicKey !== null) {
-//         const presaleInfo = await getPresaleInfo();
-//         // console.log("presaleInfo::::", "deposit = ", Number(presaleInfo.depositTokenAmount), "hardcap = ", Number(presaleInfo.hardcapAmount), "bnb = ", Number(presaleInfo.solAmount));
-//         // console.log("presaleInfo::::", "sold = ", Number(presaleInfo.soldTokenAmount), "total = ", Number(presaleInfo.totalAmount), "usdc = ", Number(presaleInfo.usdcAmount));
-//         // console.log("usdt = ", Number(presaleInfo.usdtAmount));
-//         // console.log("presaleInfo :::: ", presaleInfo);
+    //   const fetchPresaleInfo = async () => {
+    //   if (address) {
+    //     const presaleInfo = await getPresaleInfo();
+    //     // console.log("presaleInfo::::", "deposit = ", Number(presaleInfo.depositTokenAmount), "hardcap = ", Number(presaleInfo.hardcapAmount), "bnb = ", Number(presaleInfo.solAmount));
+    //     // console.log("presaleInfo::::", "sold = ", Number(presaleInfo.soldTokenAmount), "total = ", Number(presaleInfo.totalAmount), "usdc = ", Number(presaleInfo.usdcAmount));
+    //     // console.log("usdt = ", Number(presaleInfo.usdtAmount));
+    //     // console.log("presaleInfo :::: ", presaleInfo);
 
-//         if (!presaleInfo) {
-//           setPresaleInfo(null);
-//         } else {
-//           setPresaleInfo(presaleInfo);
-//           const now = Date.now() / 1000;
-//           if (now > presaleInfo.claimTime) {
-//             setClaimEnable(true);
-//           } else {
-//             setClaimEnable(false);
-//           }
-//         }
+    //     if (!presaleInfo) {
+    //       setPresaleInfo(null);
+    //     } else {
+    //       setPresaleInfo(presaleInfo);
+    //       const now = Date.now() / 1000;
+    //       if (now > presaleInfo.claimTime) {
+    //         setClaimEnable(true);
+    //       } else {
+    //         setClaimEnable(false);
+    //       }
+    //     }
 
-//         const userInfo = await getUserInfo();
-//         if (userInfo) {
-//           // console.log("userInfo ==== ", Number(userInfo.buyTokenAmount), ", ", Number(userInfo.claimAmount))
-//           setUserInfo(userInfo);
-//           const buyAnount = Number(userInfo?.buyTokenAmount) / 10 ** TOKEN_DECIMALS;
-//           setBuyTokenAmount(buyAnount);
-//         } else {
-//           setUserInfo(null);
-//         }
-//       }
-//     }
-//     fetchPresaleInfo();
+    //     const userInfo = await getUserInfo();
+    //     if (userInfo) {
+    //       // console.log("userInfo ==== ", Number(userInfo.buyTokenAmount), ", ", Number(userInfo.claimAmount))
+    //       setUserInfo(userInfo);
+    //       const buyAnount = Number(userInfo?.buyTokenAmount) / 10 ** TOKEN_DECIMALS;
+    //       setBuyTokenAmount(buyAnount);
+    //     } else {
+    //       setUserInfo(null);
+    //     }
+    //   }
+    // }
+    // fetchPresaleInfo();
 
-//   }, [walletCtx])
+  const getPresaleInfo = async () => {
+    const usdRaisedAmount = await readContract(config, {
+      abi: ABI,
+      address: contracts.presale.TESTNET as `0x${string}`,
+      functionName: "overalllRaised",
+      args: [],
+    });
+    const presaleInfo = await readContract(config, {
+      abi: ABI,
+      address: contracts.presale.TESTNET as `0x${string}`,
+      functionName: "presale",
+      args: [1],
+    });
+
+    setUsdRaisedAmount(Number(usdRaisedAmount));
+    if (presaleInfo && typeof presaleInfo === 'object' && 'Sold' in presaleInfo) {
+      setTokenSoldAmount(Number((presaleInfo as any).Sold) / 10 ** 18);
+    }
+
+    console.log("usdRaisedAmount === ", usdRaisedAmount)
+    console.log("presaleInfo === ", presaleInfo)
+
+    if (address) {
+      const tokenBalance = await readContract(config, {
+        abi: erc20Abi,
+        address: contracts.dimon.TESTNET as `0x${string}`,
+        functionName: "balanceOf",
+        args: [address],
+      })
+
+      console.log("tokenBalance === ", tokenBalance)
+        
+      setTokenBalance(Number(tokenBalance) / 10 ** 18);
+    }
+  }
+
+  const getBNBPriceFromBinance = async () => {
+    try {
+      const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd');
+      const data = await res.json();
+      // console.log("ddddddddddd === ", data)
+      // setBnbPrice(Number(data.binancecoin.usd));
+      return Number(data.binancecoin.usd);
+    } catch (err) {
+      console.error(err);
+      // setBnbPrice(0);
+      return 0;
+    }
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getPresaleInfo();
+    }, 10000);
+  
+    return () => clearInterval(interval);
+
+  }, [address, status])
 
   const handlePayChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -138,11 +206,13 @@ const PresaleCard = (): JSX.Element => {
           const amount = parseFloat(value) / currentPrice;
           setReceiveAmount(amount.toString());
         } else if (selectedPayment === 'bnb') {
-        //   const solPrice = await fetchSOLPrice();
-        //   const amount = parseFloat(value) * solPrice / currentPrice;
-          const solPrice = 150;
-          const amount = parseFloat(value) * solPrice / currentPrice;
-          setReceiveAmount(amount.toString());
+          const bnbPrice = await getBNBPriceFromBinance();
+        //   const bnbPrice = await fetchBNBPrice();
+        //   const amount = parseFloat(value) * bnbPrice / currentPrice;
+          // const bnbPrice = 645;
+          const amount = parseFloat(value) * bnbPrice / currentPrice;
+          console.log("amount ===", amount, ", value = ", value, ", bnbprice = ", bnbPrice, ", currentprice = ", currentPrice)
+          setReceiveAmount(amount.toFixed(2));
         }
       } else {
         setReceiveAmount('');
@@ -157,8 +227,8 @@ const PresaleCard = (): JSX.Element => {
         const amount = parseFloat(payAmount) / currentPrice;
         setReceiveAmount(amount.toString());
       } else if (id === 'bnb') {
-        // const solPrice = await fetchSOLPrice();
-        // const amount = parseFloat(payAmount) * solPrice / currentPrice;
+        // const bnbPrice = await fetchBNBPrice();
+        // const amount = parseFloat(payAmount) * bnbPrice / currentPrice;
         const amount = parseFloat(payAmount) * 150 / currentPrice;
         setReceiveAmount(amount.toString());
       }
@@ -201,12 +271,10 @@ const PresaleCard = (): JSX.Element => {
 
   const payment = getPaymentDetails();
 
-
-
-  const onTrade = async () => {
+  const buyWithEth = async () => {
     console.log("selectedPayment = ", selectedPayment, ", payAmount = ", payAmount)
-    if (!address) {
-      toast.error('No Wallet Connected!');
+    if (!isConnected) {
+      toast.warning('Wallet not connected');
       return;
     }
 
@@ -216,47 +284,41 @@ const PresaleCard = (): JSX.Element => {
     }
 
     const id = toast.loading(`Buying DIMON...`);
-    // try {
-    //   if (selectedPayment === 'bnb') {
-    //     let tx = new Transaction().add(await buySol(parseFloat(payAmount) * LAMPORTS_PER_SOL));
-    //     const txHash = await send(connection, walletCtx, tx);
-    //     toast.dismiss(id);
-    //     if (txHash === "") {
-    //       toast.error('Create failed!');
-    //       return;
-    //     }
-    //     toast.success('Success!');
-    //   } else if (selectedPayment === 'usdt') {
-    //     let tx = new Transaction().add(await buyUsdt(Number(payAmount) * 10 ** TOKEN_DECIMALS));
-    //     const txHash = await send(connection, walletCtx, tx);
-    //     toast.dismiss(id);
-    //     if (txHash === "") {
-    //       toast.error('Create failed!');
-    //       return;
-    //     }
-    //     toast.success('Success!');
-    //   } else if (selectedPayment === 'usdc') {
-    //     let tx = new Transaction().add(await buyUsdc(Number(payAmount) * 10 ** TOKEN_DECIMALS));
-    //     const txHash = await send(connection, walletCtx, tx);
-    //     toast.dismiss(id);
-    //     if (txHash === "") {
-    //       toast.error('Create failed!');
-    //       return;
-    //     }
-    //     toast.success('Success!');
-    //   } else if (selectedPayment === 'card') {
-    //     toast.dismiss(id);
-    //     toast.success('Success!');
-    //   }
-    // } catch (err) {
-    //   console.error(err);
-    //   toast.dismiss(id);
-    //   if (err instanceof Error) {
-    //     toast.error(err.message);
-    //   } else {
-    //     toast.error('An unknown error occurred.');
-    //   }
-    // }
+    try {
+      if (selectedPayment === 'bnb') {
+        console.log("aria config = ", config)
+        // const hash = await writeContract(config, {
+        //   abi: ABI,
+        //   address: contracts.presale.TESTNET as `0x${string}`,
+        //   functionName: "buyWithEth",
+        //   args: [payAmount],
+        //   value: parseEther(payAmount),
+        // })
+
+        const hash = await writeContractAsync({
+          abi: ABI,
+          address: contracts.presale.TESTNET as `0x${string}`,
+          functionName: "buyWithEth",
+          value: parseEther(payAmount),
+        })
+
+        toast.dismiss(id);
+        if (hash) {
+          toast.success('Success!');
+          setStatus(!status);
+        } else {
+          toast.error('Transaction hash is undefined.');
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      toast.dismiss(id);
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error('An unknown error occurred.');
+      }
+    }
   };
 
   const onCreatePresale = async () => {
@@ -457,9 +519,9 @@ const PresaleCard = (): JSX.Element => {
               </h2>
               <div className='flex flex-col gap-10 py-6 w-full'>
                 <PresaleProgress
-                  percentageSold={presaleInfo?.totalAmount / 10 ** 18}
-                  totalRaised={presaleInfo?.totalAmount / 10 ** 18}
-                  tokensSold={Number(presaleInfo?.soldTokenAmount) / 10 ** 18}
+                  percentageSold={usdRasiedAmount / 10 ** 18}
+                  totalRaised={usdRasiedAmount / 10 ** 18}
+                  tokensSold={Number(tokenSoldAmount) / 10 ** 18}
                 />
                 
                 {claimEnable === false ? (
@@ -467,7 +529,7 @@ const PresaleCard = (): JSX.Element => {
                     <TokenPrice 
                       currentPrice={currentPrice}
                       nextPrice={nextPrice}
-                      symbol="$DIMON" 
+                      symbol="$DIMON"
                     />
                     
                     {/* <PaymentOptions 
@@ -523,7 +585,11 @@ const PresaleCard = (): JSX.Element => {
                       </div>
                     </div>
 
-                    <button type='button' className="bg-[#005FF0] hover:bg-[#005FF0]/90 text-white rounded-md py-2 text-base font-bold mt-2" onClick={onTrade}>BUY</button>
+                    {isConnected ? (
+                      <button type='button' className="bg-[#005FF0] hover:bg-[#005FF0]/90 text-white rounded-md py-2 text-base font-bold mt-2" onClick={async () => { await buyWithEth() }}>BUY</button>  
+                    ) : (
+                      <ConnectButton label="Connect Wallet" />
+                    )}
                   </>
 
                 ) : (
@@ -533,7 +599,7 @@ const PresaleCard = (): JSX.Element => {
                 )}
                 
                 <div className="text-black self-center">
-                  Your Token Amount: {buyTokenAmount.toFixed(3)} $DIMON
+                  Your Token Amount: {tokenBalanceAmount.toLocaleString()} $DIMON
                 </div>
 
                 {/* {address === adminAddress && (
