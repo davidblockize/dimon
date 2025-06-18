@@ -33,12 +33,12 @@ const PresaleProgress: React.FC<PresaleProgressProps> = ({
 
   return (
     <div className="flex flex-col items-center w-full space-y-2">
-      <div className="relative w-full h-8 rounded bg-white">
+      <div className="relative w-full h-8 rounded bg-white border border-[#005FF0]">
         <div 
-            className="absolute h-full bg-gradient-to-r rounded from-white to-[#a3ff12] border border-solid border-gray-500/50"
-            style={{ width: `${soldPercent}%`, boxShadow: '0 2px 10.5px #f9ff38' }}
+            className="absolute h-full bg-gradient-to-r rounded from-white to-[#005FF0] border border-solid border-gray-500/50"
+            style={{ width: `${soldPercent}%`, boxShadow: '0 2px 10.5px #005FF0' }}
         >
-            <div className="absolute inset-0 rounded bg-[#a3ff12] animate-pulse"></div>
+            <div className="absolute inset-0 rounded bg-[#005FF0] animate-pulse"></div>
             {soldPercent > 21 ? (
               <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black font-bold text-sm">
                 {soldPercent.toFixed(2)}% Sold

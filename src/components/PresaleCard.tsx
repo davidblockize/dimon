@@ -519,8 +519,8 @@ const PresaleCard = (): JSX.Element => {
               </h2>
               <div className='flex flex-col gap-10 py-6 w-full'>
                 <PresaleProgress
-                  percentageSold={usdRasiedAmount / 10 ** 18}
-                  totalRaised={usdRasiedAmount / 10 ** 18}
+                  percentageSold={usdRasiedAmount / 10 ** 6}
+                  totalRaised={usdRasiedAmount / 10 ** 6}
                   tokensSold={Number(tokenSoldAmount) / 10 ** 18}
                 />
                 
