@@ -23,7 +23,7 @@ export const ConnectButton = ({ label, showBalance }: ConnectButtonProps) => {
                   <button
                     onClick={openConnectModal}
                     type="button"
-                    className={`flex justify-center items-center font-bold place-contence-center h-[40px] w-full border-none  text-md outline-none bg-[#005FF0] hover:bg-[#005FF0]/90 px-2 rounded-md text-white`}
+                    className={`flex justify-center items-center font-bold place-contence-center py-2 w-full border-none text-md outline-none bg-[#005FF0] hover:bg-[#005FF0]/90 px-2 rounded-lg text-white`}
                   >
                     {theme?<img src="/ConnectWallet.png" width="20px" height="20px" />:<img src="/ConnectWalletWhite.png" width="20px" height="20px" />}
                     &nbsp;{label}
@@ -39,7 +39,7 @@ export const ConnectButton = ({ label, showBalance }: ConnectButtonProps) => {
               }
               return (
                 <div style={{ display: "flex", gap: 12 }}>
-                  <button onClick={openAccountModal} type="button" className={`w-full bg-[#005FF0] hover:bg-[#005FF0]/90 h-[40px] px-2 rounded-md`}>
+                  <button onClick={openAccountModal} type="button" className={`w-full bg-[#005FF0] hover:bg-[#005FF0]/90 px-3 py-2 rounded-lg text-white text-sm`}>
                     {formatAddress(account.address)}
                     {showBalance ? ` (${account.displayBalance})` : ""}
                   </button>

@@ -11,6 +11,8 @@ import PresaleProgress from "./ui/PresaleProgress";
 import { ABI } from "../idl/idl";
 import { contracts } from '../constants/contracts'
 import { ConnectButton } from "./ui/connectButton";
+import CountdownTimer from "./CountdownTimer";
+import { useCountdown } from "../hooks/useCountdown";
 
 const PresaleCard = (): JSX.Element => {
   const adminAddress = import.meta.env.VITE_PRESALE_ADMIN_ADDRESS;
@@ -18,13 +20,17 @@ const PresaleCard = (): JSX.Element => {
   const nextPrice = import.meta.env.VITE_PRESALE_PRICE_PER_TOKEN_NEXT;
 
   const { address, isConnected } = useAccount()
-  const { writeContractAsync } = useWriteContract();
   const [payAmount, setPayAmount] = useState<string>('0');
   const [receiveAmount, setReceiveAmount] = useState<string>('0');
   const [usdRasiedAmount, setUsdRaisedAmount] = useState(0);
   const [tokenSoldAmount, setTokenSoldAmount] = useState(0);
   const [tokenBalanceAmount, setTokenBalance] = useState(0);
   const [status, setStatus] = useState(false);
+  const [presaleStartDate, setPresaleStartDate] = useState(1750356300000)
+
+  const { writeContractAsync } = useWriteContract();
+  // const presaleStartDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  const countdown = useCountdown(presaleStartDate);
 
   const getPresaleInfo = async () => {
     const usdRaisedAmount = await readContract(config, {
@@ -41,12 +47,15 @@ const PresaleCard = (): JSX.Element => {
     });
 
     setUsdRaisedAmount(Number(usdRaisedAmount));
-    if (presaleInfo && typeof presaleInfo === 'object' && 'Sold' in presaleInfo) {
-      setTokenSoldAmount(Number((presaleInfo as any).Sold) / 10 ** 18);
+    if (presaleInfo) {
+      const presaleInfoStr = String(presaleInfo);
+      const presaleInfoArray = presaleInfoStr.split(",");
+      // console.log(":::::::::::::", Number(presaleInfoArray[4]));
+      setTokenSoldAmount(Number(presaleInfoArray[4]));
     }
 
-    console.log("usdRaisedAmount === ", usdRaisedAmount)
-    console.log("presaleInfo === ", presaleInfo)
+    // console.log("usdRaisedAmount === ", usdRaisedAmount)
+    // console.log("presaleInfo === ", presaleInfo)
 
     if (address) {
       const tokenBalance = await readContract(config, {
@@ -56,7 +65,7 @@ const PresaleCard = (): JSX.Element => {
         args: [address],
       })
 
-      console.log("tokenBalance === ", tokenBalance)
+      // console.log("tokenBalance === ", tokenBalance)
         
       setTokenBalance(Number(tokenBalance) / 10 ** 18);
     }
@@ -76,11 +85,11 @@ const PresaleCard = (): JSX.Element => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    // const interval = setInterval(() => {
       getPresaleInfo();
-    }, 10000);
+    // }, 10000);
   
-    return () => clearInterval(interval);
+    // return () => clearInterval(interval);
 
   }, [address, status])
 
@@ -92,7 +101,7 @@ const PresaleCard = (): JSX.Element => {
         const bnbPrice = await getBNBPriceFromCoingecko();
         const amount = parseFloat(value) * bnbPrice / currentPrice;
 
-        console.log("amount ===", amount, ", value = ", value, ", bnbprice = ", bnbPrice, ", currentprice = ", currentPrice)
+        // console.log("amount ===", amount, ", value = ", value, ", bnbprice = ", bnbPrice, ", currentprice = ", currentPrice)
 
         setReceiveAmount(amount.toFixed(2));
       } else {
@@ -101,9 +110,8 @@ const PresaleCard = (): JSX.Element => {
     }
   };
 
-
   const buyWithEth = async () => {
-    console.log(" payAmount = ", payAmount)
+    // console.log(" payAmount = ", payAmount)
     if (!isConnected) {
       toast.warning('Wallet not connected');
       return;
@@ -116,7 +124,7 @@ const PresaleCard = (): JSX.Element => {
 
     const id = toast.loading(`Buying DIMON...`);
     try {
-      console.log("aria config = ", config)
+      // console.log("aria config = ", config)
 
       const hash = await writeContractAsync({
         abi: ABI,
@@ -150,7 +158,7 @@ const PresaleCard = (): JSX.Element => {
           {/* Emperor Access Key Card */}
           <Card className="w-[95%] sm:w-[556px] border border-solid border-gray-500/50 bg-white rounded-xl relative">
             <CardContent className="p-8 flex flex-col items-center">
-              <h2
+              {/* <h2
                 className="w-80 mx-auto font-bold text-black text-[40px] text-center tracking-[0] leading-[48px] whitespace-nowrap"
                 style={{
                   WebkitBackgroundClip: "text",
@@ -159,15 +167,25 @@ const PresaleCard = (): JSX.Element => {
                 }}
               >
                 Presale Live
-              </h2>
+              </h2> */}
+
+              <CountdownTimer
+                days={countdown.days}
+                hours={countdown.hours}
+                minutes={countdown.minutes}
+                seconds={countdown.seconds}
+                isActive={countdown.isActive}
+              />
+
               <div className='flex flex-col gap-10 py-6 w-full'>
                 <PresaleProgress
                   percentageSold={usdRasiedAmount / 10 ** 6}
                   totalRaised={usdRasiedAmount / 10 ** 6}
-                  tokensSold={Number(tokenSoldAmount) / 10 ** 18}
+                  // tokensSold={Number(tokenSoldAmount) / 10 ** 18}
                 />
                 
-                <TokenPrice 
+                <TokenPrice
+                  tokensSold={Number(tokenSoldAmount) / 10 ** 18}
                   currentPrice={currentPrice}
                   nextPrice={nextPrice}
                   symbol="$DIMON"
@@ -175,7 +193,7 @@ const PresaleCard = (): JSX.Element => {
                 
                 <div className="flex flex-col w-full space-y-2">
                   <div className="flex justify-between w-full gap-3 items-end">
-                    <div className="flex flex-col relative">
+                    <div className="flex flex-col relative w-full">
                       <span className="text-black mb-1">bnb you pay</span>
                       <div className="flex-1 relative">
                         <input
@@ -193,7 +211,7 @@ const PresaleCard = (): JSX.Element => {
                       </div>
                     </div>
                     
-                    <div className="flex flex-col relative">
+                    <div className="flex flex-col relative w-full">
                       <span className="text-black mb-1">$DIMON you receive</span>
                       <div className="flex-1 relative">
                         <input
@@ -211,14 +229,30 @@ const PresaleCard = (): JSX.Element => {
                 </div>
 
                 {isConnected ? (
-                  <button type='button' className="bg-[#005FF0] hover:bg-[#005FF0]/90 text-white rounded-md py-2 text-base font-bold mt-2" onClick={async () => { await buyWithEth() }}>BUY</button>  
+                  <button
+                    type='button'
+                    className={`${countdown.isActive ? 'bg-gray-300 cursor-not-allowed' : 'bg-[#005FF0] hover:bg-[#005FF0]/90'} text-white rounded-md py-2 text-base font-bold mt-2`}
+                    onClick={async () => { await buyWithEth() }}
+                    disabled={countdown.isActive}
+                  >
+                    {countdown.isActive ? 'Presale Not Started' : 'BUY $DIMON'}
+                  </button>  
                 ) : (
                   <ConnectButton label="Connect Wallet" />
                 )}
 
                 
-                <div className="text-black self-center">
+                {/* <div className="text-black self-center">
                   Your Token Amount: {tokenBalanceAmount.toLocaleString()} $DIMON
+                </div> */}
+                {/* User Stats */}
+                <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-4 rounded-xl">
+                  <div className="flex items-center justify-center space-x-2">
+                    <span className="text-sm text-gray-500">Your Token Amount:</span>
+                    <span className="font-bold text-purple-600">
+                      {tokenBalanceAmount.toLocaleString()} $DIMON
+                    </span>
+                  </div>
                 </div>
 
                 {/* {address === adminAddress && (
