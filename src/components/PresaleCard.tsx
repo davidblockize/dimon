@@ -26,7 +26,7 @@ const PresaleCard = (): JSX.Element => {
   const [tokenSoldAmount, setTokenSoldAmount] = useState(0);
   const [tokenBalanceAmount, setTokenBalance] = useState(0);
   const [status, setStatus] = useState(false);
-  const [presaleStartDate, setPresaleStartDate] = useState(1750356300000)
+  const [presaleStartDate, setPresaleStartDate] = useState(1750366300000)
 
   const { writeContractAsync } = useWriteContract();
   // const presaleStartDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
