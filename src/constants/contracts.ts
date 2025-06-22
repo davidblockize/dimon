@@ -5,7 +5,7 @@ export const contracts = {
     },
     presale: {
         MAINNET: '',
-        TESTNET: '0xb49Ae3677C59515966b9b02d0294797E50DaC48E',
+        TESTNET: '0xAC39bB2d0094b9A74c05bAF853aE2858F601277C',//'0xb49Ae3677C59515966b9b02d0294797E50DaC48E'
     },
     wbnb: {
         MAINNET: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
