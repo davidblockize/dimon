@@ -105,12 +105,12 @@ const WhatIs = () => {
             <div className="rounded-lg p-4 border border-gray-500/50">
               <p className="font-bold mb-2">"Bitcoin is a fraud"</p>
               <p className="text-sm">September 2017</p>
-              <p className="text-xs mt-2">Bitcoin was $4,000. Now: $40,000+ 📈</p>
+              <p className="text-xs mt-2">Bitcoin was $4,000. Now: $100,000+ 📈</p>
             </div>
             <div className="rounded-lg p-4 border border-gray-500/50">
               <p className="font-bold mb-2">"Crypto is worthless"</p>
               <p className="text-sm">Multiple occasions</p>
-              <p className="text-xs mt-2">Crypto market cap: $2+ Trillion 💰</p>
+              <p className="text-xs mt-2">Crypto market cap: $3+ Trillion 💰</p>
             </div>
             <div className="rounded-lg p-4 border border-gray-500/50">
               <p className="font-bold mb-2">"It's a waste of time"</p>

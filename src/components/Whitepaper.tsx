@@ -104,11 +104,11 @@ const Whitepaper = () => {
                   <div className="space-y-3 text-sm">
                     <div className="flex justify-between">
                       <span>"Bitcoin is a fraud" (Sept 2017)</span>
-                      <span className="text-green-600 font-bold">BTC was $4,000 → Now $40,000+</span>
+                      <span className="text-green-600 font-bold">BTC was $4,000 → Now $100,000+</span>
                     </div>
                     <div className="flex justify-between">
                       <span>"Crypto is worthless" (2018)</span>
-                      <span className="text-green-600 font-bold">Market cap: $2+ Trillion</span>
+                      <span className="text-green-600 font-bold">Market cap: $3+ Trillion</span>
                     </div>
                     <div className="flex justify-between">
                       <span>"It's a waste of time" (2021)</span>
