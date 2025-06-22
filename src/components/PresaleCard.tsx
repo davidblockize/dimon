@@ -4,7 +4,8 @@ import { toast } from "react-toastify";
 import { readContract } from "@wagmi/core"
 import { parseEther, erc20Abi } from "viem"
 import { config } from "../context/wagmiSetup";
-import { useAccount, useWriteContract } from 'wagmi'
+import { useAccount, useWriteContract, usePublicClient } from 'wagmi'
+import { waitForTransactionReceipt } from "viem/actions";
 import { Card, CardContent } from "./ui/card";
 import TokenPrice from "./ui/TokenPrice";
 import PresaleProgress from "./ui/PresaleProgress";
@@ -29,6 +30,7 @@ const PresaleCard = (): JSX.Element => {
   const [presaleStartDate, setPresaleStartDate] = useState(1750366300000)
 
   const { writeContractAsync } = useWriteContract();
+  const publicClient = usePublicClient({ chainId: 97 });
   // const presaleStartDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   const countdown = useCountdown(presaleStartDate);
 
@@ -133,13 +135,35 @@ const PresaleCard = (): JSX.Element => {
         value: parseEther(payAmount),
       })
 
+      if (!hash) {
+        toast.dismiss(id);
+        toast.error("Transaction hash is undefined.");
+        return;
+      }
+
+      if (!publicClient) {
+        toast.dismiss(id);
+        toast.error("Public client is not available.");
+        return;
+      }
+      const receipt = await waitForTransactionReceipt(publicClient, {
+        hash,
+        confirmations: 1,
+      });
+
       toast.dismiss(id);
-      if (hash) {
-        toast.success('Success!');
+      if (receipt.status === 'success') {
+        toast.success("Success!");
         setStatus(!status);
       } else {
-        toast.error('Transaction hash is undefined.');
+        toast.error("Transaction reverted.");
       }
+      // if (hash) {
+      //   toast.success('Success!');
+      //   setStatus(!status);
+      // } else {
+      //   toast.error('Transaction hash is undefined.');
+      // }
     } catch (err) {
       console.error(err);
       toast.dismiss(id);
