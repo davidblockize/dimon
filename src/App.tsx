@@ -72,7 +72,7 @@ function App() {
                 <PresaleCard />
                 <WhatIs />
                 <ChaseExodus />
-                <Whitepaper />
+                {/* <Whitepaper /> */}
                 <Tokenomics />
                 <HowToBuy />
                 <MemeGrid />

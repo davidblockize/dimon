@@ -16,6 +16,7 @@ const StatsBar = () => {
 
   return (
     <div className="bg-white border-y border-gray-500/60 py-8 px-4 sm:px-6 lg:px-8">
+      <h3 className="text-2xl font-bold text-black mb-4 justify-self-center">This Isn’t Just Rage. It’s Revenue.</h3>
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* 24H Volume */}

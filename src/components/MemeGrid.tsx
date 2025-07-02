@@ -7,55 +7,55 @@ const MemeGrid = () => {
       id: 1,
       url: '/dimon_1.png',
       title: 'Jamie vs Crypto',
-      description: 'When he said Bitcoin is fraud but $DIMON hits ATH'
+      description: 'Jamie said Bitcoin was fraud. Then $DIMON hit ATH.'
     },
     {
       id: 2,
       url: '/dimon_2.png',
       title: 'Chase Overdraft Fees',
-      description: '$35 overdraft vs $0 $DIMON transactions'
+      description: '$35 to borrow your own money? Nah, we mint instead.”'
     },
     {
       id: 3,
       url: '/dimon_3.png',
       title: 'Banking vs DeFi',
-      description: '0.01% savings rate vs ∞% moon potential'
+      description: '0.01% interest vs ∞% moon juice'
     },
     {
       id: 4,
       url: '/dimon_4.png',
       title: 'Crypto is Worthless',
-      description: '$DIMON holders: Hold my beer 🍺'
+      description: '$DIMON holders: Hold my beer, and my bag.'
     },
     {
       id: 5,
       url: '/dimon_1.png',
       title: 'CEO Salary Comparison',
-      description: 'Jamie: $34M/year | $DIMON Dev: $0 (renounced)'
+      description: 'Jamie: $34M. Dev: $0. Vibes: priceless.'
     },
     {
       id: 6,
       url: '/dimon_2.png',
       title: 'The Great Exodus',
-      description: 'Chase customers fleeing to $DIMON daily'
+      description: '2,847 customers lost today. Guess who they chose?'
     },
     {
       id: 7,
       url: '/dimon_3.png',
       title: 'JPM Coin Hypocrisy',
-      description: 'Crypto is worthless... launches JPM Coin 🤔'
+      description: 'Crypto is a scam... launches JPM Coin'
     },
     {
       id: 8,
       url: '/dimon_4.png',
       title: 'Diamond Hands vs Bank Fees',
-      description: 'HODLing $DIMON > Paying Chase fees'
+      description: '$DIMON to the moon. Chase fees to the floor.'
     },
     {
       id: 9,
       url: '/dimon_1.png',
       title: 'Financial Freedom',
-      description: 'From bank slave to $DIMON millionaire'
+      description: 'From Chase slave to meme-made millionaire.'
     }
   ];
 
@@ -111,8 +111,8 @@ const MemeGrid = () => {
         <div className="text-center mt-12">
           <div className="rounded-2xl p-8 border border-gray-500/50">
             <Zap className="w-12 h-12 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold mb-4">Got a $DIMON vs Chase Meme?</h3>
-            <p className="mb-6">
+            <h3 className="text-2xl font-bold mb-4">Have meme. Will revolt. Drop your best $DIMON vs Jamie slaps.</h3>
+            <p className="mb-6 font-medium">
               Share your best anti-banking, pro-$DIMON memes with the community!
             </p>
             <div className="flex flex-col sm:flex-row gap-7 justify-center">

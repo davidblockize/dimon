@@ -20,7 +20,7 @@ const Footer = () => {
               • “Not Financial Advice. Just Financial Revenge.”
             </p>
             <p className="mb-6 max-w-md">
-              • 💥 Powered by the rage of 1,999,999 former Chase customers.
+              • 💥 Powered by the rage of 119,999,999 former Chase customers.
             </p>
             
             {/* Social Links */}
@@ -116,7 +116,7 @@ const Footer = () => {
             </a>
             <p>|</p>
             <a
-              href="#"
+              href="/whitepaper.pdf"
               target="_blank"
               rel="noopener noreferrer"
             >

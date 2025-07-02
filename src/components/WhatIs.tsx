@@ -10,8 +10,8 @@ const WhatIs = () => {
             What is $DIMON?
           </h2>
           <p className="text-xl text-black max-w-3xl mx-auto">
-            The ultimate satirical tribute to Jamie Dimon's legendary crypto hatred. 
-            While he charges overdraft fees, we're building generational wealth.
+            The ultimate satirical tribute to Jamie Dimon's legendary crypto hatred.<br />
+            He runs fees. We run memes.
           </p>
         </div>
 
@@ -21,14 +21,10 @@ const WhatIs = () => {
             <div className="bg-white rounded-2xl p-8 border border-gray-500/50">
               <h3 className="text-2xl font-bold text-black mb-4">The $DIMON Revolution</h3>
               <p className="text-black mb-4">
-                Jamie Dimon, CEO of JPMorgan Chase, has spent years calling crypto a "fraud," 
-                "worthless," and a "waste of time." Meanwhile, his bank charges $35 overdraft fees 
-                and keeps your money locked in 0.01% savings accounts.
+                Jamie Dimon spent years calling crypto a “fraud” and “worthless” - while his bank charged $35 overdraft fees and paid 0.01% interest.
               </p>
               <p className="text-black mb-4">
-                $DIMON represents everything Jamie fears: decentralized finance, community ownership, 
-                and financial freedom without banking middlemen. Every transaction is a vote against 
-                traditional banking tyranny.
+                $DIMON flips the script: community-owned, decentralized, and free from middlemen. Every transaction is a vote against the banking cartel.
               </p>
               <div className="bg-white border border-gray-500/50 rounded-lg p-4">
                 <p className="text-black font-semibold text-center">
@@ -68,7 +64,7 @@ const WhatIs = () => {
               <TrendingDown className="w-12 h-12 text-red-500 mb-4" />
               <h4 className="text-xl font-bold text-black mb-2">Bank Exodus</h4>
               <p className="text-black text-sm">
-                Every $DIMON purchase represents one less Chase customer
+                Every wallet opened is a middle finger to Chase.
               </p>
             </div>
 
@@ -76,7 +72,7 @@ const WhatIs = () => {
               <Banknote className="w-12 h-12 text-blue-500 mb-4" />
               <h4 className="text-xl font-bold text-black mb-2">Fee Freedom</h4>
               <p className="text-black text-sm">
-                No overdraft fees, no monthly charges, no Jamie
+                No Jamie. No banks. Just vibes.
               </p>
             </div>
 
@@ -84,7 +80,7 @@ const WhatIs = () => {
               <Rocket className="w-12 h-12 text-green-500 mb-4" />
               <h4 className="text-xl font-bold text-black mb-2">Proving Jamie Wrong</h4>
               <p className="text-black text-sm">
-                Every moon mission is a slap in the face to crypto FUD
+                He said crypto would die. We made him immortal in meme form.
               </p>
             </div>
 
@@ -92,7 +88,7 @@ const WhatIs = () => {
               <DollarSign className="w-12 h-12 text-purple-500 mb-4" />
               <h4 className="text-xl font-bold text-black mb-2">Generational Wealth</h4>
               <p className="text-black text-sm">
-                Building billions while banks count pennies
+                Building generational wealth — one clown coin at a time.
               </p>
             </div>
           </div>
@@ -118,6 +114,7 @@ const WhatIs = () => {
               <p className="text-xs mt-2">Meanwhile: JPM launches JPM Coin 🤔</p>
             </div>
           </div>
+          <h3 className="text-xl font-bold mt-6 text-center">The man who hated crypto now stars in one.</h3>
         </div>
       </div>
     </section>

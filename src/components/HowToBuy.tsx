@@ -33,7 +33,7 @@ const HowToBuy = () => {
     },
     {
       step: 5,
-      title: 'Laugh at JPMorgan',
+      title: 'Screenshot, flex, laugh.',
       // description: 'Enter contract address and swap ETH for $DIMON',
       icon: Shield,
       color: 'from-yellow-400 to-yellow-600'
@@ -53,7 +53,7 @@ const HowToBuy = () => {
         </div>
 
         {/* Steps */}
-        <div className="flex flex-wrap justify-center gap-8 mb-12">
+        <div className="flex flex-wrap justify-center gap-8 mb-6">
           {steps.map((step, index) => (
             <div key={index} className="relative">
               <div className="rounded-2xl p-6 border border-gray-500/50 transition-all duration-300 hover:transform hover:scale-105 w-[232px] h-full">
@@ -62,7 +62,7 @@ const HowToBuy = () => {
                 </div>
                 
                 <div className="text-center">
-                  <div className="text-sm mb-2">Step {step.step}</div>
+                  <div className="text-sm font-medium mb-2">Step {step.step}</div>
                   <h3 className="text-xl font-bold mb-3">{step.title}</h3>
                 </div>
               </div>
@@ -76,42 +76,43 @@ const HowToBuy = () => {
             </div>
           ))}
         </div>
+        <h3 className="text-xl font-bold mb-12 text-center">It takes 60 seconds to escape the bank matrix.</h3>
 
         {/* Contract Address */}
-        <div className="rounded-2xl p-8 border border-gray-500/50 mb-8">
-          <div className="text-center">
+        <div className="rounded-2xl p-8 border border-gray-500/50">
+          <div className="text-center mb-8">
             <h3 className="text-2xl font-bold mb-4">Contract Address</h3>
             <div className="rounded-lg p-4 border border-gray-500/50">
               <code className="text-sm md:text-base break-all">
                 0x1234567890abcdef1234567890abcdef12345678
               </code>
             </div>
-            <p className="text-sm mt-2">
-              Always verify the contract address before trading!
+            <p className="text-sm font-medium mt-2">
+              Double check this address — scammers love Jamie too.
             </p>
           </div>
-        </div>
 
-        {/* Quick Actions */}
-        <div className="flex flex-col sm:flex-row gap-7 justify-center">
-          <a
-            href="https://app.pancakeswap.org/#/swap?outputCurrency=0x1234567890abcdef1234567890abcdef12345678"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="space-x-2 bg-[#005FF0] hover:bg-[#005FF0eF] px-3 py-2 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center text-md justify-center"
-          >
-            <Zap className="w-6 h-6" />
-            <span>Buy on PancakeSwap</span>
-          </a>
-          
-          <a
-            href="https://dextools.io/app/en/ether/pair-explorer/0x1234567890abcdef1234567890abcdef12345678"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-[#005FF0] text-[#005FF0] hover:text-[#005FF0eF] font-bold px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 text-md justify-center"
-          >
-            <span>View Chart</span>
-          </a>
+          {/* Quick Actions */}
+          <div className="flex flex-col sm:flex-row gap-7 justify-center">
+            <a
+              href="https://app.pancakeswap.org/#/swap?outputCurrency=0x1234567890abcdef1234567890abcdef12345678"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="space-x-2 bg-[#005FF0] hover:bg-[#005FF0eF] px-3 py-2 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center text-md justify-center"
+            >
+              <Zap className="w-6 h-6" />
+              <span>Buy on PancakeSwap</span>
+            </a>
+            
+            <a
+              href="https://dextools.io/app/en/ether/pair-explorer/0x1234567890abcdef1234567890abcdef12345678"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-[#005FF0] text-[#005FF0] hover:text-[#005FF0eF] font-bold px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 text-md justify-center"
+            >
+              <span>View Chart</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>

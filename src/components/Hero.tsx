@@ -9,7 +9,7 @@ const Hero = () => {
           <div className='bg-[#005FF0] py-7'>
           
             {/* Main Logo */}
-            <div className="flex justify-center mb-8">
+            <div className="flex justify-center mb-4">
               {/* <div className="w-32 h-32 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-2xl">
                 <span className="text-gray-900 font-bold text-6xl">$</span>
               </div> */}
@@ -21,19 +21,26 @@ const Hero = () => {
             </div>
 
             {/* Title */}
-            <h1 className="text-6xl md:text-8xl font-bold mb-4">
+            <h1 className="text-6xl md:text-7xl font-bold mb-4">
               <span className="text-white">$DIMON</span>
             </h1>
 
+            {/* <p className="text-lg md:text-xl text-white max-w-3xl mx-auto">
+              The Meme Coin Chase Never Saw Coming
+            </p> */}
+
             {/* Tagline */}
-            <p className="text-2xl md:text-3xl text-white mb-2 font-medium">
-              Jamie Dimon called crypto worthless... so we named a coin after him.
+            <p className="text-2xl md:text-2xl text-white mb-2 font-medium">
+              Jamie Dimon mocked crypto. We turned him into a token.
             </p>
             
             {/* Subtitle */}
             <p className="text-lg md:text-xl text-white max-w-3xl mx-auto">
-              He mocked the future. We minted it. $DIMON isn’t just a token — it’s poetic payback. From banks to building billions — one moon at a time.
+              From overdraft fees to generational freedom - Meme Coin Chase Never Saw Coming
             </p>
+            {/* <p className="text-lg md:text-xl text-white max-w-3xl mx-auto">
+              Not just a meme. A movement.
+            </p> */}
           </div>
 
 
@@ -45,11 +52,17 @@ const Hero = () => {
             </div>
             <p className="text-4xl font-bold text-black mb-2">2,847</p>
             <p className="text-sm text-black">
-              Every $DIMON purchase = One less Chase customer 📉
+              Every $DIMON transaction = one more customer breaking up with Chase
+            </p>
+            {/* <p className="text-sm text-black">
+              Every wallet connected = one less slave to Jamie’s fees
+            </p>
+            <p className="text-sm text-black">
+              $DIMON isn’t a buy — it’s a breakup.
             </p>
             <p className="text-xs text-black mt-2">
               "I'd rather bank with a meme coin than Jamie's fees" - Anonymous Ex-Chase Customer
-            </p>
+            </p> */}
           </div>
 
           {/* CTA Buttons */}
@@ -65,12 +78,20 @@ const Hero = () => {
               {/* <ArrowRight className="w-6 h-6" /> */}
             </a>
             
-            <a
+            {/* <a
               href="#whitepaper"
               className="border border-[#005FF0] text-[#005FF0] hover:text-[#005FF0eF] font-bold px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 text-md justify-center"
             >
               <span>Read the $DIMON Paper</span>
-              {/* <ArrowRight className="w-6 h-6" /> */}
+              <ArrowRight className="w-6 h-6" />
+            </a> */}
+            <a
+              href="/litepaper.pdf"
+              target='_blank'
+              rel='noopener noreferrer'
+              className="border border-[#005FF0] text-[#005FF0] hover:text-[#005FF0eF] font-bold px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 text-md justify-center"
+            >
+              <span>Read the $DIMON Paper</span>
             </a>
             <a
               href="#memes"

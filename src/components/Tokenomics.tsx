@@ -9,7 +9,7 @@ const Tokenomics = () => {
       amount: '950M',
       color: 'from-yellow-400 to-yellow-600',
       icon: Lock,
-      description: 'Locked forever on PancakeSwap'
+      description: 'Locked forever'
     },
     {
       category: 'Marketing',
@@ -17,7 +17,7 @@ const Tokenomics = () => {
       amount: '30M',
       color: 'from-blue-400 to-blue-600',
       icon: Zap,
-      description: 'Community growth & partnerships'
+      description: 'For memes, raids, and moon missions'
     },
     {
       category: 'Team',
@@ -25,7 +25,7 @@ const Tokenomics = () => {
       amount: '20M',
       color: 'from-green-400 to-green-600',
       icon: Users,
-      description: 'Vested over 12 months'
+      description: 'Vested, not rugging'
     }
   ];
 
@@ -55,7 +55,7 @@ const Tokenomics = () => {
                 <div>
                   <p className="text-sm">Total Supply</p>
                   <p className="text-2xl font-bold">119,999,999</p>
-                  <p className="text-sm">(one for every Chase customer we’re freeing)</p>
+                  <p className="text-sm">(because we won’t rest until every last Chase account is replaced.)</p>
                 </div>
                 
                 <div>
@@ -91,8 +91,8 @@ const Tokenomics = () => {
                   <p className="text-3xl font-bold">0%</p>
                 </div>
               </div>
-              <p className="text-sm mt-4">
-                No taxes, no fees - just pure $DIMON trading freedom
+              <p className="text-sm mt-4 font-medium">
+                No fees, no friction. Just Jamie’s tears.<br />This ain’t TradFi. We don’t tax rebellion.
               </p>
             </div>
           </div>
@@ -125,6 +125,7 @@ const Tokenomics = () => {
                 </div>
               </div>
             ))}
+            <h3 className="text-xl font-bold mt-6 text-center">Locked harder than Chase’s savings account yields.</h3>
           </div>
         </div>
       </div>

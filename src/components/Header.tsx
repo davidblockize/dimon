@@ -32,7 +32,8 @@ const Header = () => {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center md:space-x-8">
               <a href="#what-is" className="text-black hover:font-bold transition-colors">What is $DIMON?</a>
-              <a href="#whitepaper" className="text-black hover:font-bold transition-colors">Whitepaper</a>
+              {/* <a href="#whitepaper" className="text-black hover:font-bold transition-colors">Whitepaper</a> */}
+              <a href="/whitepaper.pdf" target='_blank' rel='noopener noreferrer' className="text-black hover:font-bold transition-colors">Whitepaper</a>
               <a href="#tokenomics" className="text-black hover:font-bold transition-colors">Tokenomics</a>
               <a href="#how-to-buy" className="text-black hover:font-bold transition-colors">How to Buy</a>
               <a href="#memes" className="text-black hover:font-bold transition-colors">Memes</a>

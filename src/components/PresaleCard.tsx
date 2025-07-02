@@ -218,7 +218,7 @@ const PresaleCard = (): JSX.Element => {
                 <div className="flex flex-col w-full space-y-2">
                   <div className="flex justify-between w-full gap-3 items-end">
                     <div className="flex flex-col relative w-full">
-                      <span className="text-black mb-1">bnb you pay</span>
+                      <span className="text-black font-semibold mb-1">BNB in</span>
                       <div className="flex-1 relative">
                         <input
                           type="number"
@@ -236,7 +236,7 @@ const PresaleCard = (): JSX.Element => {
                     </div>
                     
                     <div className="flex flex-col relative w-full">
-                      <span className="text-black mb-1">$DIMON you receive</span>
+                      <span className="text-black font-semibold mb-1">rage out</span>
                       <div className="flex-1 relative">
                         <input
                           type="number"
