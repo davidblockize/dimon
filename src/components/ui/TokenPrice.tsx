@@ -28,7 +28,9 @@ const TokenPrice: React.FC<TokenPriceProps> = ({ tokensSold, currentPrice, nextP
     //   </div>
     // </div>
 
-    <div className="bg-gradient-to-r from-gray-50 to-blue-50 p-4 rounded-xl space-y-2">
+    <div className="bg-gradient-to-r from-gray-50 to-blue-50 p-4 rounded-xl space-y-2 shadow-xl relative overflow-hidden">
+      {/* Watermark Emoji */}
+      <span className="absolute opacity-10 text-5xl -right-2 -top-2 rotate-12 pointer-events-none select-none">💲</span>
       <div className="flex justify-between items-center">
         <span className="text-sm text-gray-600">Tokens Sold</span>
         <span className="font-semibold">{tokensSoldAmount.toLocaleString()}</span>

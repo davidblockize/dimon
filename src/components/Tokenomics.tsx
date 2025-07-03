@@ -30,11 +30,11 @@ const Tokenomics = () => {
   ];
 
   return (
-    <section id="tokenomics" className="py-20 px-4 sm:px-6 lg:px-8 bg-white text-black">
+    <section id="tokenomics" className="py-20 px-4 sm:px-6 lg:px-8 bg-white text-black font-meme">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Tokenomics That Slap
+            <span className="font-meme">Tokenomics That Slap</span>
           </h2>
           {/* <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Fair launch, community-driven, and built to last. 
@@ -42,10 +42,12 @@ const Tokenomics = () => {
           </p> */}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center font-meme">
           {/* Left Side - Token Info */}
           <div className="space-y-8">
-            <div className="rounded-2xl p-8 border border-gray-500/50">
+            <div className="rounded-2xl p-8 border border-gray-500/50 shadow-xl relative overflow-hidden">
+              {/* Watermark Emoji */}
+              <span className="absolute opacity-10 text-8xl -right-4 -top-4 rotate-12 pointer-events-none select-none">💸</span>
               <div className="flex items-center space-x-4 mb-6">
                 <PieChart className="w-8 h-8" />
                 <h3 className="text-2xl font-bold">Token Details</h3>
@@ -55,7 +57,7 @@ const Tokenomics = () => {
                 <div>
                   <p className="text-sm">Total Supply</p>
                   <p className="text-2xl font-bold">119,999,999</p>
-                  <p className="text-sm">(because we won’t rest until every last Chase account is replaced.)</p>
+                  <p className="text-sm">(because we won't rest until every last Chase account is replaced.)</p>
                 </div>
                 
                 <div>
@@ -79,20 +81,22 @@ const Tokenomics = () => {
             </div>
 
             {/* Tax Info */}
-            <div className="rounded-2xl p-8 border border-gray-500/50">
+            <div className="rounded-2xl p-8 border border-gray-500/50 shadow-xl relative overflow-hidden">
+              {/* Watermark Emoji */}
+              <span className="absolute opacity-10 text-8xl -right-4 -top-4 rotate-12 pointer-events-none select-none">😂</span>
               <h4 className="text-xl font-bold mb-4">Tax Structure</h4>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p>Buy Tax</p>
-                  <p className="text-3xl font-bold">0%</p>
+                  <p className="text-3xl font-bold hover:animate-flicker cursor-pointer">0%</p>
                 </div>
                 <div>
                   <p>Sell Tax</p>
-                  <p className="text-3xl font-bold">0%</p>
+                  <p className="text-3xl font-bold hover:animate-flicker cursor-pointer">0%</p>
                 </div>
               </div>
               <p className="text-sm mt-4 font-medium">
-                No fees, no friction. Just Jamie’s tears.<br />This ain’t TradFi. We don’t tax rebellion.
+                No fees, no friction. Just Jamie's tears.<br />This ain't TradFi. We don't tax rebellion.
               </p>
             </div>
           </div>
@@ -100,7 +104,9 @@ const Tokenomics = () => {
           {/* Right Side - Distribution */}
           <div className="space-y-6">
             {tokenomicsData.map((item, index) => (
-              <div key={index} className="rounded-xl p-6 border border-gray-500/50 transition-colors">
+              <div key={index} className="rounded-xl p-6 border border-gray-500/50 shadow-xl relative overflow-hidden transition-colors">
+                {/* Watermark Emoji */}
+                <span className="absolute opacity-10 text-7xl -right-4 -bottom-4 rotate-12 pointer-events-none select-none">{index === 0 ? '🔒' : index === 1 ? '🚀' : '🧑‍💼'}</span>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-3">
                     <div className={`p-2 bg-gradient-to-r ${item.color} rounded-lg`}>
@@ -125,7 +131,7 @@ const Tokenomics = () => {
                 </div>
               </div>
             ))}
-            <h3 className="text-xl font-bold mt-6 text-center">Locked harder than Chase’s savings account yields.</h3>
+            <h3 className="text-xl font-bold mt-6 text-center">Locked harder than Chase's savings account yields.</h3>
           </div>
         </div>
       </div>

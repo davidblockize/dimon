@@ -37,7 +37,7 @@ const MemeGrid = () => {
       id: 6,
       url: '/dimon_2.png',
       title: 'The Great Exodus',
-      description: '2,847 customers lost today. Guess who they chose?'
+      description: '2,847 customers lost today. Who they chose?'
     },
     {
       id: 7,
@@ -60,7 +60,7 @@ const MemeGrid = () => {
   ];
 
   return (
-    <section id="memes" className="py-20 px-4 sm:px-6 lg:px-8 bg-white text-black">
+    <section id="memes" className="py-20 px-4 sm:px-6 lg:px-8 bg-white text-black font-meme">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -74,7 +74,7 @@ const MemeGrid = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-32 gap-y-8">
           {memes.map((meme, index) => (
             <div key={meme.id} className="group cursor-pointer">
-              <div className="rounded-2xl overflow-hidden border border-gray-500/50 transition-all duration-300 transform hover:scale-105 min-h-[453px]">
+              <div className="rounded-2xl overflow-hidden border border-gray-500/50 transition-all duration-300 transform hover:scale-105 min-h-[453px] shadow-xl relative">
                 <div className="aspect-square flex items-center justify-center overflow-hidden">
                   <img 
                     src={meme.url} 
@@ -109,7 +109,7 @@ const MemeGrid = () => {
 
         {/* Call to Action */}
         <div className="text-center mt-12">
-          <div className="rounded-2xl p-8 border border-gray-500/50">
+          <div className="rounded-2xl p-8 border border-gray-500/50 shadow-xl relative overflow-hidden">
             <Zap className="w-12 h-12 mx-auto mb-4" />
             <h3 className="text-2xl font-bold mb-4">Have meme. Will revolt. Drop your best $DIMON vs Jamie slaps.</h3>
             <p className="mb-6 font-medium">

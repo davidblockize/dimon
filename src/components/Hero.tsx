@@ -3,11 +3,15 @@ import { ArrowRight, Zap, TrendingDown } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="pt-20 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
+    <section className="relative pt-20 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-blue-900 via-blue-800 to-blue-600 font-meme">
+      {/* Jamie Emoji Bubble */}
+      {/* <div className="absolute top-6 right-6 flex items-center space-x-2 z-20">
+        <img src="/jamie-crying.gif" alt="Jamie Crying" className="w-14 h-14 rounded-full border-2 border-white shadow-lg" />
+        <span className="bg-white text-gray-900 px-3 py-1 rounded-full shadow text-sm font-bold">"You're ruining my bank!"</span>
+      </div> */}
       <div className="max-w-7xl mx-auto">
         <div className="text-center">
-          <div className='bg-[#005FF0] py-7'>
-          
+          <div className='bg-transparent py-7'>
             {/* Main Logo */}
             <div className="flex justify-center mb-4">
               {/* <div className="w-32 h-32 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-2xl">
@@ -21,7 +25,7 @@ const Hero = () => {
             </div>
 
             {/* Title */}
-            <h1 className="text-6xl md:text-7xl font-bold mb-4">
+            <h1 className="text-6xl md:text-7xl font-meme font-bold mb-4">
               <span className="text-white">$DIMON</span>
             </h1>
 
@@ -30,7 +34,7 @@ const Hero = () => {
             </p> */}
 
             {/* Tagline */}
-            <p className="text-2xl md:text-2xl text-white mb-2 font-medium">
+            <p className="text-2xl md:text-2xl text-white mb-2 font-meme font-bold">
               Jamie Dimon mocked crypto. We turned him into a token.
             </p>
             
@@ -45,20 +49,22 @@ const Hero = () => {
 
 
           {/* Chase Customer Counter */}
-          <div className="border border-gray-500/50 rounded-2xl p-6 my-8 max-w-2xl mx-auto">
+          <div className="border border-gray-500/50 rounded-2xl p-6 my-8 max-w-2xl mx-auto bg-white/80 backdrop-blur-sm">
             <div className="flex items-center justify-center space-x-4 mb-3">
               <TrendingDown className="w-8 h-8 text-red-600" />
               <h3 className="text-2xl font-bold text-black">Chase Customers Lost Today</h3>
             </div>
-            <p className="text-4xl font-bold text-black mb-2">2,847</p>
+            <p className="text-4xl font-bold text-black mb-2">
+              <span className="dimon-animated-counter">2,847</span>
+            </p>
             <p className="text-sm text-black">
               Every $DIMON transaction = one more customer breaking up with Chase
             </p>
             {/* <p className="text-sm text-black">
-              Every wallet connected = one less slave to Jamie’s fees
+              Every wallet connected = one less slave to Jamie's fees
             </p>
             <p className="text-sm text-black">
-              $DIMON isn’t a buy — it’s a breakup.
+              $DIMON isn't a buy — it's a breakup.
             </p>
             <p className="text-xs text-black mt-2">
               "I'd rather bank with a meme coin than Jamie's fees" - Anonymous Ex-Chase Customer
@@ -71,44 +77,31 @@ const Hero = () => {
               href="https://app.pancakeswap.org/#/swap?outputCurrency=0x1234567890abcdef1234567890abcdef12345678"
               target="_blank"
               rel="noopener noreferrer"
-              className="space-x-2 bg-[#005FF0] hover:bg-[#005FF0eF] px-3 py-2 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center text-md justify-center"
+              className="space-x-2 bg-gradient-to-r from-yellow-400 via-red-400 to-pink-500 hover:from-yellow-500 hover:via-red-500 hover:to-pink-600 px-3 py-2 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center text-md justify-center border border-yellow-300 w-[225px] sm:w-auto"
             >
-              {/* <Zap className="w-6 h-6" /> */}
               <span>Buy $DIMON</span>
-              {/* <ArrowRight className="w-6 h-6" /> */}
             </a>
-            
-            {/* <a
-              href="#whitepaper"
-              className="border border-[#005FF0] text-[#005FF0] hover:text-[#005FF0eF] font-bold px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 text-md justify-center"
-            >
-              <span>Read the $DIMON Paper</span>
-              <ArrowRight className="w-6 h-6" />
-            </a> */}
             <a
               href="/litepaper.pdf"
               target='_blank'
               rel='noopener noreferrer'
-              className="border border-[#005FF0] text-[#005FF0] hover:text-[#005FF0eF] font-bold px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 text-md justify-center"
+              className="border border-pink-400 text-pink-600 hover:bg-pink-50 font-bold px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 text-md justify-center shadow-md bg-white/90 w-[225px] sm:w-auto"
             >
               <span>Read the $DIMON Paper</span>
             </a>
             <a
               href="#memes"
-              className="border border-[#005FF0] text-[#005FF0] hover:text-[#005FF0eF] font-bold px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 text-md justify-center"
+              className="border border-green-400 text-green-600 hover:bg-green-50 font-bold px-3 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 text-md justify-center shadow-md bg-white/90 w-[225px] sm:w-auto"
             >
               <span>Explore the Meme Gallery</span>
-              {/* <ArrowRight className="w-6 h-6" /> */}
             </a>
           </div>
 
           {/* Jamie's Quotes Ticker */}
-          <div className="mt-12 rounded-lg p-4 border border-gray-500/50">
+          <div className="mt-12 rounded-lg p-4 border border-gray-500/50 bg-white/80 backdrop-blur-sm">
             <p className="text-sm text-black mb-2">💬 Jamie's Greatest Hits:</p>
-            <div className="overflow-hidden">
-              <div className="animate-pulse text-black font-medium">
-                "Bitcoin is a fraud" • "Crypto is worthless" • "I don't personally think Bitcoin is worth anything" • "It's a waste of time"
-              </div>
+            <div className="text-black font-medium">
+              "Bitcoin is a fraud" • "Crypto is worthless" • "I don't personally think Bitcoin is worth anything" • "It's a waste of time"
             </div>
           </div>
 

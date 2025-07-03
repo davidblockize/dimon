@@ -22,7 +22,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
 
   if (!isActive) {
     return (
-      <div className="tems-center justify-center mb-4">
+      <div className="tems-center justify-center mb-4 font-meme">
         <div className="flex items-center justify-center">
           <div className="w-2 h-2 bg-green-600 rounded-full animate-pulse"></div>
           <h2 className="ml-2 font-bold text-black text-[40px] text-center tracking-[0] leading-[48px] whitespace-nowrap">Presale Live</h2>

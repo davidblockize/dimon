@@ -1,6 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { TrendingDown, Users, DollarSign, ArrowRight } from 'lucide-react';
 
+// Animated number hook
+function useAnimatedNumber(target: number, duration = 1000) {
+  const [display, setDisplay] = useState(target);
+  useEffect(() => {
+    let start = display;
+    let startTime: number | null = null;
+    if (start === target) return;
+    function animate(ts: number) {
+      if (!startTime) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
+      setDisplay(Math.floor(start + (target - start) * progress));
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    }
+    requestAnimationFrame(animate);
+    // eslint-disable-next-line
+  }, [target]);
+  return display;
+}
+
 const ChaseExodus = () => {
   const [customersLost, setCustomersLost] = useState(() => {
     const stored = localStorage.getItem('chase-customers-lost');
@@ -34,11 +55,16 @@ const ChaseExodus = () => {
     return () => clearInterval(interval);
   }, [customersLost, feesAvoided]);
 
+  // Animated numbers
+  const animatedCustomersLost = useAnimatedNumber(customersLost);
+  const animatedFeesAvoided = useAnimatedNumber(feesAvoided);
+  const animatedNewHolders = useAnimatedNumber(Math.floor(customersLost * 0.7));
+
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white text-black">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white text-black font-meme">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-meme font-bold mb-6">
             The Great Chase Exodus
           </h2>
           <p className="text-xl max-w-3xl mx-auto">
@@ -48,45 +74,42 @@ const ChaseExodus = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {/* Customers Lost */}
-          <div className="p-8 text-center">
-            <TrendingDown className="w-16 h-16 text-red-500 mx-auto mb-4" />
+          <div className="p-8 text-center shadow-xl relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/80 via-blue-100/60 to-blue-300/40 border-2 border-blue-400/40 backdrop-blur-md">
+            {/* Watermark Emoji */}
+            <span className="absolute opacity-10 text-7xl -right-4 -top-4 rotate-12 pointer-events-none select-none">🧍‍♂️</span>
+            <div className="flex justify-center items-center mb-4">
+              <TrendingDown className="w-20 h-20 text-red-500 drop-shadow-lg bg-white/60 rounded-full p-3 border-4 border-red-200" />
+            </div>
             <h3 className="text-2xl font-bold mb-2">🧍‍♂️Chase Customers Lost Today</h3>
-            <p className="text-5xl font-bold mb-2">{customersLost.toLocaleString()}</p>
-            {/* <p className="text-gray-400">And counting... 📉</p>
-            <div className="mt-4 bg-red-800/30 rounded-lg p-3">
-              <p className="text-red-300 text-sm">
-                "I'd rather trust a meme coin than Jamie's overdraft fees"
-              </p>
-              <p className="text-gray-500 text-xs mt-1">- Anonymous Ex-Chase Customer</p>
-            </div> */}
+            <p className="text-5xl font-extrabold mb-2 text-blue-700 tracking-tight">
+              {animatedCustomersLost.toLocaleString()}
+            </p>
           </div>
 
           {/* Fees Avoided */}
-          <div className="p-8 text-center">
-            <DollarSign className="w-16 h-16 text-green-500 mx-auto mb-4" />
+          <div className="p-8 text-center shadow-xl relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/80 via-green-100/60 to-green-300/40 border-2 border-green-400/40 backdrop-blur-md">
+            {/* Watermark Emoji */}
+            <span className="absolute opacity-10 text-7xl -right-4 -top-4 rotate-12 pointer-events-none select-none">💸</span>
+            <div className="flex justify-center items-center mb-4">
+              <DollarSign className="w-20 h-20 text-green-500 drop-shadow-lg bg-white/60 rounded-full p-3 border-4 border-green-200" />
+            </div>
             <h3 className="text-2xl font-bold mb-2">💸 Paper Handed</h3>
-            <p className="text-5xl font-bold mb-2">${feesAvoided.toLocaleString()}</p>
-            {/* <p className="text-gray-400">Saved from overdrafts 💰</p> */}
-            {/* <div className="mt-4 bg-green-800/30 rounded-lg p-3">
-              <p className="text-green-300 text-sm">
-                Average Chase customer pays $329/year in fees
-              </p>
-              <p className="text-gray-500 text-xs mt-1">$DIMON holders pay: $0</p>
-            </div> */}
+            <p className="text-5xl font-extrabold mb-2 text-green-700 tracking-tight">
+              ${animatedFeesAvoided.toLocaleString()}
+            </p>
           </div>
 
           {/* New $DIMON Holders */}
-          <div className="p-8 text-center">
-            <Users className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
+          <div className="p-8 text-center shadow-xl relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/80 via-yellow-100/60 to-yellow-300/40 border-2 border-yellow-400/40 backdrop-blur-md">
+            {/* Watermark Emoji */}
+            <span className="absolute opacity-10 text-7xl -right-4 -top-4 rotate-12 pointer-events-none select-none">🚪</span>
+            <div className="flex justify-center items-center mb-4">
+              <Users className="w-20 h-20 text-yellow-500 drop-shadow-lg bg-white/60 rounded-full p-3 border-4 border-yellow-200" />
+            </div>
             <h3 className="text-2xl font-bold mb-2">🚪 Your Exodus Block</h3>
-            <p className="text-5xl font-bold mb-2">{Math.floor(customersLost * 0.7).toLocaleString()}</p>
-            {/* <p className="text-gray-400">Freedom fighters 🚀</p> */}
-            {/* <div className="mt-4 bg-yellow-800/30 rounded-lg p-3">
-              <p className="text-yellow-300 text-sm">
-                70% conversion rate from Chase refugees
-              </p>
-              <p className="text-gray-500 text-xs mt-1">Welcome to financial freedom!</p>
-            </div> */}
+            <p className="text-5xl font-extrabold mb-2 text-yellow-700 tracking-tight">
+              {animatedNewHolders.toLocaleString()}
+            </p>
           </div>
         </div>
 
@@ -141,7 +164,7 @@ const ChaseExodus = () => {
 
         {/* Call to Action */}
         <div className="text-center">
-          <div className="rounded-2xl p-8 border border-gray-500/50">
+          <div className="rounded-2xl p-8 border border-gray-500/50 shadow-xl relative overflow-hidden">
             <h3 className="text-3xl font-bold mb-4">Join the Exodus</h3>
             <p className="text-xl mb-6">
               Be part of the movement that's proving Jamie Dimon wrong, one transaction at a time.

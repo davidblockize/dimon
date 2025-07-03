@@ -15,12 +15,14 @@ const StatsBar = () => {
   };
 
   return (
-    <div className="bg-white border-y border-gray-500/60 py-8 px-4 sm:px-6 lg:px-8">
-      <h3 className="text-2xl font-bold text-black mb-4 justify-self-center">This Isn’t Just Rage. It’s Revenue.</h3>
+    <div className="bg-white border-y border-gray-500/60 py-8 px-4 sm:px-6 lg:px-8 font-meme">
+      <h3 className="text-2xl font-meme font-bold text-black mb-4 text-center">This Isn't Just Rage. It's Revenue.</h3>
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* 24H Volume */}
-          <div className="bg-white rounded-lg p-6 border border-gray-500/50 transition-colors">
+          <div className="bg-white rounded-lg p-6 border border-gray-500/50 shadow-xl relative overflow-hidden">
+            {/* Watermark Emoji */}
+            <span className="absolute opacity-10 text-6xl -right-2 -top-2 rotate-12 pointer-events-none select-none">💸</span>
             <div className="flex items-center space-x-3">
               <div className="p-2 bg-green-500/20 rounded-lg">
                 <BarChart3 className="w-6 h-6 text-green-400" />
@@ -34,7 +36,9 @@ const StatsBar = () => {
           </div>
 
           {/* Holders */}
-          <div className="bg-white rounded-lg p-6 border border-gray-500/50 transition-colors">
+          <div className="bg-white rounded-lg p-6 border border-gray-500/50 shadow-xl relative overflow-hidden">
+            {/* Watermark Emoji */}
+            <span className="absolute opacity-10 text-6xl -right-2 -top-2 rotate-12 pointer-events-none select-none">🔥</span>
             <div className="flex items-center space-x-3">
               <div className="p-2 bg-blue-500/20 rounded-lg">
                 <Users className="w-6 h-6 text-blue-400" />
@@ -48,7 +52,9 @@ const StatsBar = () => {
           </div>
 
           {/* Liquidity */}
-          <div className="bg-white rounded-lg p-6 border border-gray-500/50 transition-colors">
+          <div className="bg-white rounded-lg p-6 border border-gray-500/50 shadow-xl relative overflow-hidden">
+            {/* Watermark Emoji */}
+            <span className="absolute opacity-10 text-6xl -right-2 -top-2 rotate-12 pointer-events-none select-none">🔒</span>
             <div className="flex items-center space-x-3">
               <div className="p-2 bg-yellow-500/20 rounded-lg">
                 <Lock className="w-6 h-6 text-yellow-400" />
@@ -62,7 +68,9 @@ const StatsBar = () => {
           </div>
 
           {/* Market Cap */}
-          <div className="bg-white rounded-lg p-6 border border-gray-500/50 transition-colors">
+          <div className="bg-white rounded-lg p-6 border border-gray-500/50 shadow-xl relative overflow-hidden">
+            {/* Watermark Emoji */}
+            <span className="absolute opacity-10 text-6xl -right-2 -top-2 rotate-12 pointer-events-none select-none">🚀</span>
             <div className="flex items-center space-x-3">
               <div className="p-2 bg-purple-500/20 rounded-lg">
                 <TrendingUp className="w-6 h-6 text-purple-400" />

@@ -176,11 +176,13 @@ const PresaleCard = (): JSX.Element => {
   };
 
   return (
-    <section className="flex flex-col items-center pt-5 pb-24 w-full bg-white">
+    <section className="flex flex-col items-center pt-5 pb-24 w-full bg-white font-meme">
       <div className="relative max-w-[1200px] w-full">
         <div className="flex flex-wrap justify-center gap-8 mt-16">
           {/* Emperor Access Key Card */}
-          <Card className="w-[95%] sm:w-[556px] border border-solid border-gray-500/50 bg-white rounded-xl relative">
+          <Card className="w-[95%] sm:w-[556px] border border-solid border-gray-500/50 bg-white rounded-xl relative shadow-xl overflow-hidden">
+            {/* Watermark Emoji */}
+            <span className="absolute opacity-10 text-8xl -right-4 -top-4 rotate-12 pointer-events-none select-none">🎟️</span>
             <CardContent className="p-8 flex flex-col items-center">
               {/* <h2
                 className="w-80 mx-auto font-bold text-black text-[40px] text-center tracking-[0] leading-[48px] whitespace-nowrap"

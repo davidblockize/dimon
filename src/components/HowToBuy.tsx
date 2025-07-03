@@ -41,7 +41,7 @@ const HowToBuy = () => {
   ];
 
   return (
-    <section id="how-to-buy" className="py-20 px-4 sm:px-6 lg:px-8 bg-white text-black">
+    <section id="how-to-buy" className="py-20 px-4 sm:px-6 lg:px-8 bg-white text-black font-meme">
       <div className="max-w-8xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -55,31 +55,25 @@ const HowToBuy = () => {
         {/* Steps */}
         <div className="flex flex-wrap justify-center gap-8 mb-6">
           {steps.map((step, index) => (
-            <div key={index} className="relative">
-              <div className="rounded-2xl p-6 border border-gray-500/50 transition-all duration-300 hover:transform hover:scale-105 w-[232px] h-full">
+            <div key={index} className="relative shadow-xl overflow-hidden rounded-2xl bg-white">
+              {/* Watermark Emoji */}
+              <span className="absolute opacity-10 text-7xl -right-4 -top-4 rotate-12 pointer-events-none select-none">{index === 0 ? '👛' : index === 1 ? '🪙' : index === 2 ? '🔗' : index === 3 ? '💱' : '😂'}</span>
+              <div className="rounded-2xl p-6 border border-gray-500/50 transition-all duration-300 hover:transform hover:scale-105 w-[232px] h-full bg-white">
                 <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto`}>
                   <step.icon className="w-10 h-10" />
                 </div>
-                
                 <div className="text-center">
                   <div className="text-sm font-medium mb-2">Step {step.step}</div>
                   <h3 className="text-xl font-bold mb-3">{step.title}</h3>
                 </div>
               </div>
-              
-              {/* Arrow connector */}
-              {/* {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
-                  <ArrowRight className="w-6 h-6 text-gray-600" />
-                </div>
-              )} */}
             </div>
           ))}
         </div>
         <h3 className="text-xl font-bold mb-12 text-center">It takes 60 seconds to escape the bank matrix.</h3>
 
         {/* Contract Address */}
-        <div className="rounded-2xl p-8 border border-gray-500/50">
+        <div className="rounded-2xl p-8 border border-gray-500/50 shadow-xl relative overflow-hidden">
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold mb-4">Contract Address</h3>
             <div className="rounded-lg p-4 border border-gray-500/50">

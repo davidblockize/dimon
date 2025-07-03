@@ -58,13 +58,17 @@ const PresaleProgress: React.FC<PresaleProgressProps> = ({
         <p className="text-sm text-black">Tokens Sold : {tokensSoldAmount.toLocaleString()}</p>
       </div> */}
       <div className="grid grid-cols-2 gap-4 text-center w-full">
-        <div className="bg-blue-50 p-3 rounded-lg">
+        <div className="bg-blue-50 p-3 rounded-lg shadow-xl relative overflow-hidden">
+          {/* Watermark Emoji */}
+          <span className="absolute opacity-10 text-5xl -right-2 -top-2 rotate-12 pointer-events-none select-none">💰</span>
           <div className="text-lg font-bold text-blue-600">
             ${totalRaisedAmount.toLocaleString()}
           </div>
           <div className="text-xs text-gray-500">USD Raised</div>
         </div>
-        <div className="bg-gray-50 p-3 rounded-lg">
+        <div className="bg-gray-50 p-3 rounded-lg shadow-xl relative overflow-hidden">
+          {/* Watermark Emoji */}
+          <span className="absolute opacity-10 text-5xl -right-2 -top-2 rotate-12 pointer-events-none select-none">🎯</span>
           <div className="text-lg font-bold text-gray-600">
             ${hardcapUsd.toLocaleString()}
           </div>

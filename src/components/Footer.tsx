@@ -3,7 +3,7 @@ import { Twitter, MessageCircle, Globe, Shield, Lock, Zap } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#ECEFF1] border-t border-gray-500/50 py-10 md:py-16 px-4 sm:px-6 lg:px-8 text-black">
+    <footer className="bg-[#ECEFF1] border-t border-gray-500/50 py-10 md:py-16 px-4 sm:px-6 lg:px-8 text-black font-meme">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Logo & Description */}

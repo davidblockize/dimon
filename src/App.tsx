@@ -27,6 +27,7 @@ import MemeGrid from './components/MemeGrid';
 import Footer from './components/Footer';
 import { StatsProvider } from './context/StatsContext';
 import PresaleCard from './components/PresaleCard';
+import FloatingBadgeStrip from './components/FloatingBadgeStrip';
 
 // const config = getDefaultConfig({
 //   appName: 'DimonPresale',
@@ -77,6 +78,7 @@ function App() {
                 <HowToBuy />
                 <MemeGrid />
                 <Footer />
+                <FloatingBadgeStrip />
               </div>
             </StatsProvider>
           </RainbowKitProvider>
