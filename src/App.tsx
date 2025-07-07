@@ -28,6 +28,8 @@ import Footer from './components/Footer';
 import { StatsProvider } from './context/StatsContext';
 import PresaleCard from './components/PresaleCard';
 import FloatingBadgeStrip from './components/FloatingBadgeStrip';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import CardPaymentInfo from './components/CardPaymentInfo';
 
 // const config = getDefaultConfig({
 //   appName: 'DimonPresale',
@@ -66,20 +68,27 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <RainbowKitProvider theme={darkTheme()} avatar={CustomAvatar}>
             <StatsProvider>
-              <div className="min-h-screen bg-gray-900">
-                <Header />
-                <Hero />
-                <StatsBar />
-                <PresaleCard />
-                <WhatIs />
-                <ChaseExodus />
-                {/* <Whitepaper /> */}
-                <Tokenomics />
-                <HowToBuy />
-                <MemeGrid />
-                <Footer />
-                <FloatingBadgeStrip />
-              </div>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={
+                    <div className="min-h-screen bg-gray-900">
+                      <Header />
+                      <Hero />
+                      <StatsBar />
+                      <PresaleCard />
+                      <WhatIs />
+                      <ChaseExodus />
+                      {/* <Whitepaper /> */}
+                      <Tokenomics />
+                      <HowToBuy />
+                      <MemeGrid />
+                      <Footer />
+                      <FloatingBadgeStrip />
+                    </div>
+                  } />
+                  <Route path="/pay-with-card" element={<CardPaymentInfo />} />
+                </Routes>
+              </BrowserRouter>
             </StatsProvider>
           </RainbowKitProvider>
         </QueryClientProvider>

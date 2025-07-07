@@ -18,21 +18,21 @@ const PaymentOptions: React.FC<PaymentOptionsProps> = ({
   onSelect 
 }) => {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 w-full gap-2">
+    <div className="grid grid-cols-3 w-full gap-4">
       {options.map((option) => (
         <button
           key={option.id}
           onClick={() => onSelect(option.id)}
           className={`flex items-center justify-center space-x-2 py-3 px-4 rounded-lg transition-all duration-300 w-full
             ${selectedOption === option.id 
-              ? 'bg-gradient-to-br from-yellow-900/60 to-yellow-700/40 border border-yellow-400/30' 
-              : 'bg-gray-800/60 border border-gray-700 hover:bg-gray-700/50'
+              ? 'bg-blue-300 rounded-lg shadow-xl border border-blue-700/30' 
+              : 'bg-gray-200 rounded-lg shadow-xl border border-gray-700/30'
             }`}
         >
-          <span className={`${selectedOption === option.id ? 'text-yellow-300' : 'text-gray-300'}`}>
+          <span className={`${selectedOption === option.id ? 'text-blue-600' : 'text-gray-500'}`}>
             {option.icon}
           </span>
-          <span className={`font-medium ${selectedOption === option.id ? 'text-yellow-300' : 'text-gray-300'}`}>
+          <span className={`font-bold ${selectedOption === option.id ? 'text-blue-600' : 'text-gray-500'}`}>
             {option.name}
           </span>
         </button>

@@ -14,6 +14,8 @@ import { contracts } from '../constants/contracts'
 import { ConnectButton } from "./ui/connectButton";
 import CountdownTimer from "./CountdownTimer";
 import { useCountdown } from "../hooks/useCountdown";
+import PaymentOptions from "./ui/PaymentOptions";
+import { useNavigate } from 'react-router-dom';
 
 const PresaleCard = (): JSX.Element => {
   const adminAddress = import.meta.env.VITE_PRESALE_ADMIN_ADDRESS;
@@ -28,11 +30,36 @@ const PresaleCard = (): JSX.Element => {
   const [tokenBalanceAmount, setTokenBalance] = useState(0);
   const [status, setStatus] = useState(false);
   const [presaleStartDate, setPresaleStartDate] = useState(1750366300000)
+  const [paymentMethod, setPaymentMethod] = useState<string>("bnb");
 
   const { writeContractAsync } = useWriteContract();
   const publicClient = usePublicClient({ chainId: 97 });
   // const presaleStartDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   const countdown = useCountdown(presaleStartDate);
+  const navigate = useNavigate();
+
+  const paymentOptions = [
+    {
+      id: "bnb",
+      name: "BNB",
+      icon: (
+        <svg viewBox="0 0 96 96" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="48" cy="48" r="48" fill="#F0B90B" />
+          <path d="M30.9008 25.9057L47.8088 16.0637L64.7169 25.9057L58.5007 29.5416L47.8088 23.3355L37.117 29.5416L30.9008 25.9057ZM64.7169 38.3179L58.5007 34.682L47.8088 40.8881L37.117 34.682L30.9008 38.3179V45.5897L41.5926 51.7958V64.2079L47.8088 67.8438L54.0251 64.2079V51.7958L64.7169 45.5897V38.3179ZM64.7169 58.0018V50.7301L58.5007 54.366V61.6377L64.7169 58.0018ZM69.1305 60.572L58.4386 66.7781V74.0499L75.3467 64.2079V44.524L69.1305 48.1599V60.572ZM62.9143 32.1118L69.1305 35.7477V43.0195L75.3467 39.3836V32.1118L69.1305 28.4759L62.9143 32.1118ZM41.5926 69.411V76.6828L47.8088 80.3187L54.0251 76.6828V69.411L47.8088 73.0469L41.5926 69.411ZM30.9008 58.0018L37.117 61.6377V54.366L30.9008 50.7301V58.0018ZM41.5926 32.1118L47.8088 35.7477L54.0251 32.1118L47.8088 28.4759L41.5926 32.1118ZM26.4872 35.7477L32.7034 32.1118L26.4872 28.4759L20.271 32.1118V39.3836L26.4872 43.0195V35.7477ZM26.4872 48.1599L20.271 44.524V64.2079L37.1791 74.0499V66.7781L26.4872 60.572V48.1599Z" fill="white" />
+        </svg>
+      ),
+    },
+    {
+      id: "sol",
+      name: "SOL",
+      icon: <img src="/sol.png" alt="solana" width={28} height={28} style={{borderRadius: 16}} />,
+    },
+    {
+      id: "card",
+      name: "CARD",
+      icon: <img src="/card.png" alt="card" width={28} height={28} style={{borderRadius: 6}} />,
+    },
+  ];
 
   const getPresaleInfo = async () => {
     const usdRaisedAmount = await readContract(config, {
@@ -175,6 +202,23 @@ const PresaleCard = (): JSX.Element => {
     }
   };
 
+  const handleBuy = async () => {
+    if (paymentMethod === "bnb") {
+      await buyWithEth();
+    } else if (paymentMethod === "sol") {
+      toast.info("Coming soon!");
+    } else if (paymentMethod === "card") {
+      navigate("/pay-with-card");
+    }
+  };
+
+  const handlePaymentOptionSelect = (id: string) => {
+    setPaymentMethod(id);
+    if (id === 'card') {
+      navigate('/pay-with-card');
+    }
+  };
+
   return (
     <section className="flex flex-col items-center pt-5 pb-24 w-full bg-white font-meme">
       <div className="relative max-w-[1200px] w-full">
@@ -216,11 +260,19 @@ const PresaleCard = (): JSX.Element => {
                   nextPrice={nextPrice}
                   symbol="$DIMON"
                 />
+
+                <PaymentOptions
+                  options={paymentOptions}
+                  selectedOption={paymentMethod}
+                  onSelect={handlePaymentOptionSelect}
+                />
                 
                 <div className="flex flex-col w-full space-y-2">
                   <div className="flex justify-between w-full gap-3 items-end">
                     <div className="flex flex-col relative w-full">
-                      <span className="text-black font-semibold mb-1">BNB in</span>
+                      <span className="text-black font-semibold mb-1">
+                        {paymentMethod === "bnb" ? "BNB in" : paymentMethod === "sol" ? "SOL in" : "CARD in"}
+                      </span>
                       <div className="flex-1 relative">
                         <input
                           type="number"
@@ -229,10 +281,16 @@ const PresaleCard = (): JSX.Element => {
                           className="w-full bg-white border border-gray-500/50 rounded-lg py-3 pl-3 pr-3 text-black focus:outline-none focus:ring-1 focus:ring-[#005FF0]"
                         />
                         <div className="absolute inset-y-0 right-8 flex items-center pl-3 pointer-events-none">
-                          <svg viewBox="0 0 96 96" width="32px" height="32px" color="text" xmlns="http://www.w3.org/2000/svg" style={{marginRight: '8px', width: '32px', height: '32px'}}>
-                            <circle cx="48" cy="48" r="48" fill="#F0B90B" />
-                            <path d="M30.9008 25.9057L47.8088 16.0637L64.7169 25.9057L58.5007 29.5416L47.8088 23.3355L37.117 29.5416L30.9008 25.9057ZM64.7169 38.3179L58.5007 34.682L47.8088 40.8881L37.117 34.682L30.9008 38.3179V45.5897L41.5926 51.7958V64.2079L47.8088 67.8438L54.0251 64.2079V51.7958L64.7169 45.5897V38.3179ZM64.7169 58.0018V50.7301L58.5007 54.366V61.6377L64.7169 58.0018ZM69.1305 60.572L58.4386 66.7781V74.0499L75.3467 64.2079V44.524L69.1305 48.1599V60.572ZM62.9143 32.1118L69.1305 35.7477V43.0195L75.3467 39.3836V32.1118L69.1305 28.4759L62.9143 32.1118ZM41.5926 69.411V76.6828L47.8088 80.3187L54.0251 76.6828V69.411L47.8088 73.0469L41.5926 69.411ZM30.9008 58.0018L37.117 61.6377V54.366L30.9008 50.7301V58.0018ZM41.5926 32.1118L47.8088 35.7477L54.0251 32.1118L47.8088 28.4759L41.5926 32.1118ZM26.4872 35.7477L32.7034 32.1118L26.4872 28.4759L20.271 32.1118V39.3836L26.4872 43.0195V35.7477ZM26.4872 48.1599L20.271 44.524V64.2079L37.1791 74.0499V66.7781L26.4872 60.572V48.1599Z" fill="white" />
-                          </svg>
+                          {paymentMethod === "bnb" ? (
+                            <svg viewBox="0 0 96 96" width="32px" height="32px" color="text" xmlns="http://www.w3.org/2000/svg" style={{marginRight: '8px', width: '32px', height: '32px'}}>
+                              <circle cx="48" cy="48" r="48" fill="#F0B90B" />
+                              <path d="M30.9008 25.9057L47.8088 16.0637L64.7169 25.9057L58.5007 29.5416L47.8088 23.3355L37.117 29.5416L30.9008 25.9057ZM64.7169 38.3179L58.5007 34.682L47.8088 40.8881L37.117 34.682L30.9008 38.3179V45.5897L41.5926 51.7958V64.2079L47.8088 67.8438L54.0251 64.2079V51.7958L64.7169 45.5897V38.3179ZM64.7169 58.0018V50.7301L58.5007 54.366V61.6377L64.7169 58.0018ZM69.1305 60.572L58.4386 66.7781V74.0499L75.3467 64.2079V44.524L69.1305 48.1599V60.572ZM62.9143 32.1118L69.1305 35.7477V43.0195L75.3467 39.3836V32.1118L69.1305 28.4759L62.9143 32.1118ZM41.5926 69.411V76.6828L47.8088 80.3187L54.0251 76.6828V69.411L47.8088 73.0469L41.5926 69.411ZM30.9008 58.0018L37.117 61.6377V54.366L30.9008 50.7301V58.0018ZM41.5926 32.1118L47.8088 35.7477L54.0251 32.1118L47.8088 28.4759L41.5926 32.1118ZM26.4872 35.7477L32.7034 32.1118L26.4872 28.4759L20.271 32.1118V39.3836L26.4872 43.0195V35.7477ZM26.4872 48.1599L20.271 44.524V64.2079L37.1791 74.0499V66.7781L26.4872 60.572V48.1599Z" fill="white" />
+                            </svg>
+                          ) : paymentMethod === "sol" ? (
+                            <img src="/sol.png" alt="solana" width={32} height={32} style={{borderRadius: 16, marginRight: 8}} />
+                          ) : (
+                            <img src="/card.png" alt="card" width={32} height={32} style={{borderRadius: 6, marginRight: 8}} />
+                          )}
                         </div>
                       </div>
                     </div>
@@ -258,10 +316,10 @@ const PresaleCard = (): JSX.Element => {
                   <button
                     type='button'
                     className={`${countdown.isActive ? 'bg-gray-300 cursor-not-allowed' : 'bg-[#005FF0] hover:bg-[#005FF0]/90'} text-white rounded-md py-2 text-base font-bold mt-2`}
-                    onClick={async () => { await buyWithEth() }}
+                    onClick={handleBuy}
                     disabled={countdown.isActive}
                   >
-                    {countdown.isActive ? 'Presale Not Started' : 'BUY $DIMON'}
+                    {countdown.isActive ? 'Presale Not Started' : `BUY $DIMON with ${paymentMethod.toUpperCase()}`}
                   </button>  
                 ) : (
                   <ConnectButton label="Connect Wallet" />
