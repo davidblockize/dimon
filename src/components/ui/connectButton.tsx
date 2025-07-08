@@ -6,9 +6,11 @@ const formatAddress = (addr: string) => {
 interface ConnectButtonProps {
   label: string;
   showBalance?: boolean;
+  backgroundColor?: string;
+  color?: string;
 }
 
-export const ConnectButton = ({ label, showBalance }: ConnectButtonProps) => {
+export const ConnectButton = ({ label, showBalance, backgroundColor, color }: ConnectButtonProps) => {
   const {theme, toggleTheme} = useTheme();
   return (
     <RainbowkitConnectButton.Custom>
@@ -16,30 +18,34 @@ export const ConnectButton = ({ label, showBalance }: ConnectButtonProps) => {
         const ready = mounted
         const connected = ready && account && chain
         return (
-          <div className = "w-full">
+          <div className = {`w-full text-base font-bold ${color}`}>
             {(() => {
               if (!connected) {
                 return (
-                  <button
-                    onClick={openConnectModal}
-                    type="button"
-                    className={`flex justify-center items-center font-bold place-contence-center py-2 w-full border-none text-md outline-none bg-[#005FF0] hover:bg-[#005FF0]/90 px-2 rounded-lg text-white`}
-                  >
-                    {theme?<img src="/ConnectWallet.png" width="20px" height="20px" />:<img src="/ConnectWalletWhite.png" width="20px" height="20px" />}
-                    &nbsp;{label}
-                  </button>
+                  <div className="flex justify-center items-center">
+                    {/* {theme?<img src="/ConnectWallet.png" width="20px" height="20px" />:<img src="/ConnectWalletWhite.png" width="20px" height="20px" />} */}
+                    <button
+                      onClick={openConnectModal}
+                      type="button"
+                      className={`flex justify-center items-center place-contence-center py-3 w-full border-none outline-none ${backgroundColor} px-2 rounded-lg`}
+                    >
+                      {label}
+                    </button>
+                  </div>
+                  
                 )
               }
               if (chain.unsupported) {
                 return (
-                  <button onClick={openChainModal} type="button">
+                  <button onClick={openChainModal} type="button" className={`${backgroundColor} border-none`}>
                     Wrong network
                   </button>
                 )
               }
               return (
-                <div style={{ display: "flex", gap: 12 }}>
-                  <button onClick={openAccountModal} type="button" className={`w-full bg-[#005FF0] hover:bg-[#005FF0]/90 px-3 py-2 rounded-lg text-white text-sm`}>
+                <div style={{ display: "flex" }}>
+                  {/* {theme?<img src="/ConnectWallet.png" width="20px" height="20px" />:<img src="/ConnectWalletWhite.png" width="20px" height="20px" />} */}
+                  <button onClick={openAccountModal} type="button" className={`w-full ${backgroundColor} px-2 py-2 rounded-lg`}>
                     {formatAddress(account.address)}
                     {showBalance ? ` (${account.displayBalance})` : ""}
                   </button>

@@ -2,15 +2,26 @@ import React, { useState } from 'react';
 import { Menu, X, Twitter, MessageCircle, Copy, QrCode, FileText } from 'lucide-react';
 import QRCodeGenerator from './QRCodeGenerator';
 import { ConnectButton } from './ui/connectButton';
+import SolanaConnectButton from './ui/SolanaConnectButton';
+import { usePaymentMethod } from '../context/PaymentMethodContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLgMenuOpen, setIsLgMenuOpen] = useState(false);
   const [showQR, setShowQR] = useState(false);
+  const { selectedPaymentMethod } = usePaymentMethod();
 
   const copyContract = () => {
     navigator.clipboard.writeText('0x1234567890abcdef1234567890abcdef12345678');
     alert('Contract address copied!');
+  };
+
+  const renderConnectButton = () => {
+    if (selectedPaymentMethod === 'sol') {
+      return <SolanaConnectButton label="Connect Wallet" backgroundColor="transparent" color="black" />;
+    } else {
+      return <ConnectButton label="Connect Wallet" backgroundColor="bg-transparent" color='text-black' />;
+    }
   };
 
   return (
@@ -62,7 +73,7 @@ const Header = () => {
                 <FileText className="w-4 h-4 text-white" />
                 <span className="text-sm text-white">Whitepaper</span>
               </a> */}
-              <ConnectButton label="Connect Wallet" />
+              {renderConnectButton()}
               <a
                 href="https://t.me/"
                 target="_blank"
@@ -147,7 +158,7 @@ const Header = () => {
                   <Twitter className="w-6 h-6" />
                 </a>
               </div>
-              <ConnectButton label="Connect Wallet" />
+              {renderConnectButton()}
             </div>
           </div>
         )}
@@ -199,7 +210,6 @@ const Header = () => {
           </div>
         )}
       </header>
-      
       {showQR && <QRCodeGenerator onClose={() => setShowQR(false)} />}
     </>
   );

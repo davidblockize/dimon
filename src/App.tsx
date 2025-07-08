@@ -30,6 +30,10 @@ import PresaleCard from './components/PresaleCard';
 import FloatingBadgeStrip from './components/FloatingBadgeStrip';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import CardPaymentInfo from './components/CardPaymentInfo';
+import { SolanaWalletProvider } from './context/SolanaWalletProvider';
+import { MultichainProvider } from './context/MultichainContext';
+import { PaymentMethodProvider } from './context/PaymentMethodContext';
+import { config } from './context/wagmiSetup';
 
 // const config = getDefaultConfig({
 //   appName: 'DimonPresale',
@@ -38,18 +42,18 @@ import CardPaymentInfo from './components/CardPaymentInfo';
 //   ssr: true, // If your dApp uses server side rendering (SSR)
 // });
 
-const config = getDefaultConfig({
-  appName: "DimonPresale",
-  projectId: "293a761c6f1f8691938d803059c73e54",
-  chains: [bscTestnet],
-  transports: {
-    [bscTestnet.id]: http("https://bnb-testnet.g.alchemy.com/v2/jJYJsns9CjkrmyIEsM2859AbB-d2cevE"),
-  },
-  ssr: true,
-  storage: createStorage({
-    storage: cookieStorage,
-  }),
-})
+// const config = getDefaultConfig({
+//   appName: "DimonPresale",
+//   projectId: "293a761c6f1f8691938d803059c73e54",
+//   chains: [bscTestnet],
+//   transports: {
+//     [bscTestnet.id]: http("https://bnb-testnet.g.alchemy.com/v2/jJYJsns9CjkrmyIEsM2859AbB-d2cevE"),
+//   },
+//   ssr: true,
+//   storage: createStorage({
+//     storage: cookieStorage,
+//   }),
+// })
 const CustomAvatar = () => {
   return (
     <img
@@ -67,29 +71,35 @@ function App() {
       <WagmiProvider config={config}>
         <QueryClientProvider client={queryClient}>
           <RainbowKitProvider theme={darkTheme()} avatar={CustomAvatar}>
-            <StatsProvider>
-              <BrowserRouter>
-                <Routes>
-                  <Route path="/" element={
-                    <div className="min-h-screen bg-gray-900">
-                      <Header />
-                      <Hero />
-                      <StatsBar />
-                      <PresaleCard />
-                      <WhatIs />
-                      <ChaseExodus />
-                      {/* <Whitepaper /> */}
-                      <Tokenomics />
-                      <HowToBuy />
-                      <MemeGrid />
-                      <Footer />
-                      <FloatingBadgeStrip />
-                    </div>
-                  } />
-                  <Route path="/pay-with-card" element={<CardPaymentInfo />} />
-                </Routes>
-              </BrowserRouter>
-            </StatsProvider>
+            <SolanaWalletProvider>
+              <MultichainProvider>
+                <StatsProvider>
+                  <PaymentMethodProvider>
+                    <BrowserRouter>
+                      <Routes>
+                        <Route path="/" element={
+                          <div className="min-h-screen bg-gray-900">
+                            <Header />
+                            <Hero />
+                            <StatsBar />
+                            <PresaleCard />
+                            <WhatIs />
+                            <ChaseExodus />
+                            {/* <Whitepaper /> */}
+                            <Tokenomics />
+                            <HowToBuy />
+                            <MemeGrid />
+                            <Footer />
+                            <FloatingBadgeStrip />
+                          </div>
+                        } />
+                        <Route path="/pay-with-card" element={<CardPaymentInfo />} />
+                      </Routes>
+                    </BrowserRouter>
+                  </PaymentMethodProvider>
+                </StatsProvider>
+              </MultichainProvider>
+            </SolanaWalletProvider>
           </RainbowKitProvider>
         </QueryClientProvider>
       </WagmiProvider>

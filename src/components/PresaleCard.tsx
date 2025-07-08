@@ -16,6 +16,10 @@ import CountdownTimer from "./CountdownTimer";
 import { useCountdown } from "../hooks/useCountdown";
 import PaymentOptions from "./ui/PaymentOptions";
 import { useNavigate } from 'react-router-dom';
+import { useMultichain } from '../context/MultichainContext';
+import { createSolanaPresaleService } from '../services/SolanaPresaleService';
+import SolanaConnectButton from './ui/SolanaConnectButton';
+import { usePaymentMethod } from '../context/PaymentMethodContext';
 
 const PresaleCard = (): JSX.Element => {
   const adminAddress = import.meta.env.VITE_PRESALE_ADMIN_ADDRESS;
@@ -23,6 +27,8 @@ const PresaleCard = (): JSX.Element => {
   const nextPrice = import.meta.env.VITE_PRESALE_PRICE_PER_TOKEN_NEXT;
 
   const { address, isConnected } = useAccount()
+  const { selectedChain, setSelectedChain, solanaWallet, solanaConnection, solanaIsConnected } = useMultichain();
+  const { selectedPaymentMethod, setSelectedPaymentMethod } = usePaymentMethod();
   const [payAmount, setPayAmount] = useState<string>('0');
   const [receiveAmount, setReceiveAmount] = useState<string>('0');
   const [usdRasiedAmount, setUsdRaisedAmount] = useState(0);
@@ -30,7 +36,11 @@ const PresaleCard = (): JSX.Element => {
   const [tokenBalanceAmount, setTokenBalance] = useState(0);
   const [status, setStatus] = useState(false);
   const [presaleStartDate, setPresaleStartDate] = useState(1750366300000)
-  const [paymentMethod, setPaymentMethod] = useState<string>("bnb");
+  const [evmAddress, setEvmAddress] = useState<string>('');
+  const [evmAddressError, setEvmAddressError] = useState<string>('');
+
+  // console.log("solanaIsConnected = ", solanaIsConnected)
+  // const [paymentMethod, setPaymentMethod] = useState<string>("bnb");
 
   const { writeContractAsync } = useWriteContract();
   const publicClient = usePublicClient({ chainId: 97 });
@@ -62,41 +72,48 @@ const PresaleCard = (): JSX.Element => {
   ];
 
   const getPresaleInfo = async () => {
-    const usdRaisedAmount = await readContract(config, {
-      abi: ABI,
-      address: contracts.presale.TESTNET as `0x${string}`,
-      functionName: "overalllRaised",
-      args: [],
-    });
-    const presaleInfo = await readContract(config, {
-      abi: ABI,
-      address: contracts.presale.TESTNET as `0x${string}`,
-      functionName: "presale",
-      args: [1],
-    });
+    if (selectedChain === 'bsc') {
+      const usdRaisedAmount = await readContract(config, {
+        abi: ABI,
+        address: contracts.presale.TESTNET as `0x${string}`,
+        functionName: "overalllRaised",
+        args: [],
+      });
+      const presaleInfo = await readContract(config, {
+        abi: ABI,
+        address: contracts.presale.TESTNET as `0x${string}`,
+        functionName: "presale",
+        args: [1],
+      });
 
-    setUsdRaisedAmount(Number(usdRaisedAmount));
-    if (presaleInfo) {
-      const presaleInfoStr = String(presaleInfo);
-      const presaleInfoArray = presaleInfoStr.split(",");
-      // console.log(":::::::::::::", Number(presaleInfoArray[4]));
-      setTokenSoldAmount(Number(presaleInfoArray[4]));
-    }
+      setUsdRaisedAmount(Number(usdRaisedAmount));
+      if (presaleInfo) {
+        const presaleInfoStr = String(presaleInfo);
+        const presaleInfoArray = presaleInfoStr.split(",");
+        setTokenSoldAmount(Number(presaleInfoArray[4]));
+      }
 
-    // console.log("usdRaisedAmount === ", usdRaisedAmount)
-    // console.log("presaleInfo === ", presaleInfo)
-
-    if (address) {
-      const tokenBalance = await readContract(config, {
-        abi: erc20Abi,
-        address: contracts.dimon.TESTNET as `0x${string}`,
-        functionName: "balanceOf",
-        args: [address],
-      })
-
-      // console.log("tokenBalance === ", tokenBalance)
+      if (address) {
+        const tokenBalance = await readContract(config, {
+          abi: erc20Abi,
+          address: contracts.dimon.TESTNET as `0x${string}`,
+          functionName: "balanceOf",
+          args: [address],
+        })
         
-      setTokenBalance(Number(tokenBalance) / 10 ** 18);
+        setTokenBalance(Number(tokenBalance) / 10 ** 18);
+      }
+    } else if (selectedChain === 'solana') {
+      if (solanaWallet && solanaConnection) {
+        const solanaService = createSolanaPresaleService(solanaConnection, solanaWallet);
+        const presaleInfo = await solanaService.getPresaleInfo();
+        
+        setUsdRaisedAmount(presaleInfo.totalRaised);
+        setTokenSoldAmount(presaleInfo.tokensSold);
+        
+        const tokenBalance = await solanaService.getTokenBalance();
+        setTokenBalance(tokenBalance);
+      }
     }
   }
 
@@ -113,6 +130,18 @@ const PresaleCard = (): JSX.Element => {
     }
   };
 
+  const getSOLPriceFromCoingecko = async () => {
+    try {
+      const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd');
+      const data = await res.json();
+
+      return Number(data.solana.usd);
+    } catch (err) {
+      console.error(err);
+      return 0;
+    }
+  };
+
   useEffect(() => {
     // const interval = setInterval(() => {
       getPresaleInfo();
@@ -120,19 +149,22 @@ const PresaleCard = (): JSX.Element => {
   
     // return () => clearInterval(interval);
 
-  }, [address, status])
+  }, [address, status, selectedPaymentMethod])
 
   const handlePayChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value === '' || /^\d*\.?\d*$/.test(value)) {
       setPayAmount(value);
       if (value) {
-        const bnbPrice = await getBNBPriceFromCoingecko();
-        const amount = parseFloat(value) * bnbPrice / currentPrice;
-
-        // console.log("amount ===", amount, ", value = ", value, ", bnbprice = ", bnbPrice, ", currentprice = ", currentPrice)
-
-        setReceiveAmount(amount.toFixed(2));
+        if (selectedPaymentMethod === 'bnb') {
+          const bnbPrice = await getBNBPriceFromCoingecko();
+          const amount = parseFloat(value) * bnbPrice / currentPrice;
+          setReceiveAmount(amount.toFixed(2));
+        } else if (selectedPaymentMethod === 'sol') {
+          const solPrice = await getSOLPriceFromCoingecko();
+          const amount = parseFloat(value) * solPrice / currentPrice;
+          setReceiveAmount(amount.toFixed(2));
+        }
       } else {
         setReceiveAmount('');
       }
@@ -202,21 +234,73 @@ const PresaleCard = (): JSX.Element => {
     }
   };
 
+  const buyWithSol = async () => {
+    if (!solanaWallet) {
+      toast.warning('Solana wallet not connected');
+      return;
+    }
+
+    if (parseFloat(payAmount) === 0) {
+      toast.warning('Please input amount');
+      return;
+    }
+
+    const id = toast.loading(`Buying DIMON with SOL...`);
+    try {
+      const solanaService = createSolanaPresaleService(solanaConnection, solanaWallet);
+      const txHash = await solanaService.buyWithSOL(parseFloat(payAmount));
+
+      toast.dismiss(id);
+      if (txHash) {
+        toast.success("Success! Transaction hash: " + txHash);
+        setStatus(!status);
+      } else {
+        toast.error("Transaction failed.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.dismiss(id);
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error('An unknown error occurred.');
+      }
+    }
+  };
+
   const handleBuy = async () => {
-    if (paymentMethod === "bnb") {
+    if (selectedPaymentMethod === "bnb") {
       await buyWithEth();
-    } else if (paymentMethod === "sol") {
-      toast.info("Coming soon!");
-    } else if (paymentMethod === "card") {
+    } else if (selectedPaymentMethod === "sol") {
+      await buyWithSol();
+    } else if (selectedPaymentMethod === "card") {
       navigate("/pay-with-card");
     }
   };
 
-  const handlePaymentOptionSelect = (id: string) => {
-    setPaymentMethod(id);
+  const handlePaymentOptionSelect = async (id: string) => {
+    setSelectedPaymentMethod(id as 'bnb' | 'sol' | 'card');
     if (id === 'card') {
       navigate('/pay-with-card');
+    } else if (payAmount && parseFloat(payAmount) > 0) {
+      // Recalculate receive amount when switching payment methods
+      if (id === 'bnb') {
+        const bnbPrice = await getBNBPriceFromCoingecko();
+        const amount = parseFloat(payAmount) * bnbPrice / currentPrice;
+        setReceiveAmount(amount.toFixed(2));
+      } else if (id === 'sol') {
+        const solPrice = await getSOLPriceFromCoingecko();
+        const amount = parseFloat(payAmount) * solPrice / currentPrice;
+        setReceiveAmount(amount.toFixed(2));
+      }
     }
+  };
+
+  // EVM address validation
+  const validateEvmAddress = (address: string) => {
+    if (!address) return 'EVM address is required';
+    if (!/^0x[a-fA-F0-9]{40}$/.test(address)) return 'Invalid EVM address format';
+    return '';
   };
 
   return (
@@ -263,7 +347,7 @@ const PresaleCard = (): JSX.Element => {
 
                 <PaymentOptions
                   options={paymentOptions}
-                  selectedOption={paymentMethod}
+                  selectedOption={selectedPaymentMethod}
                   onSelect={handlePaymentOptionSelect}
                 />
                 
@@ -271,7 +355,7 @@ const PresaleCard = (): JSX.Element => {
                   <div className="flex justify-between w-full gap-3 items-end">
                     <div className="flex flex-col relative w-full">
                       <span className="text-black font-semibold mb-1">
-                        {paymentMethod === "bnb" ? "BNB in" : paymentMethod === "sol" ? "SOL in" : "CARD in"}
+                        {selectedPaymentMethod === "bnb" ? "BNB in" : selectedPaymentMethod === "sol" ? "SOL in" : "CARD in"}
                       </span>
                       <div className="flex-1 relative">
                         <input
@@ -281,12 +365,12 @@ const PresaleCard = (): JSX.Element => {
                           className="w-full bg-white border border-gray-500/50 rounded-lg py-3 pl-3 pr-3 text-black focus:outline-none focus:ring-1 focus:ring-[#005FF0]"
                         />
                         <div className="absolute inset-y-0 right-8 flex items-center pl-3 pointer-events-none">
-                          {paymentMethod === "bnb" ? (
+                          {selectedPaymentMethod === "bnb" ? (
                             <svg viewBox="0 0 96 96" width="32px" height="32px" color="text" xmlns="http://www.w3.org/2000/svg" style={{marginRight: '8px', width: '32px', height: '32px'}}>
                               <circle cx="48" cy="48" r="48" fill="#F0B90B" />
                               <path d="M30.9008 25.9057L47.8088 16.0637L64.7169 25.9057L58.5007 29.5416L47.8088 23.3355L37.117 29.5416L30.9008 25.9057ZM64.7169 38.3179L58.5007 34.682L47.8088 40.8881L37.117 34.682L30.9008 38.3179V45.5897L41.5926 51.7958V64.2079L47.8088 67.8438L54.0251 64.2079V51.7958L64.7169 45.5897V38.3179ZM64.7169 58.0018V50.7301L58.5007 54.366V61.6377L64.7169 58.0018ZM69.1305 60.572L58.4386 66.7781V74.0499L75.3467 64.2079V44.524L69.1305 48.1599V60.572ZM62.9143 32.1118L69.1305 35.7477V43.0195L75.3467 39.3836V32.1118L69.1305 28.4759L62.9143 32.1118ZM41.5926 69.411V76.6828L47.8088 80.3187L54.0251 76.6828V69.411L47.8088 73.0469L41.5926 69.411ZM30.9008 58.0018L37.117 61.6377V54.366L30.9008 50.7301V58.0018ZM41.5926 32.1118L47.8088 35.7477L54.0251 32.1118L47.8088 28.4759L41.5926 32.1118ZM26.4872 35.7477L32.7034 32.1118L26.4872 28.4759L20.271 32.1118V39.3836L26.4872 43.0195V35.7477ZM26.4872 48.1599L20.271 44.524V64.2079L37.1791 74.0499V66.7781L26.4872 60.572V48.1599Z" fill="white" />
                             </svg>
-                          ) : paymentMethod === "sol" ? (
+                          ) : selectedPaymentMethod === "sol" ? (
                             <img src="/sol.png" alt="solana" width={32} height={32} style={{borderRadius: 16, marginRight: 8}} />
                           ) : (
                             <img src="/card.png" alt="card" width={32} height={32} style={{borderRadius: 6, marginRight: 8}} />
@@ -311,19 +395,54 @@ const PresaleCard = (): JSX.Element => {
                     </div>
                   </div>
                 </div>
-
-                {isConnected ? (
-                  <button
-                    type='button'
-                    className={`${countdown.isActive ? 'bg-gray-300 cursor-not-allowed' : 'bg-[#005FF0] hover:bg-[#005FF0]/90'} text-white rounded-md py-2 text-base font-bold mt-2`}
-                    onClick={handleBuy}
-                    disabled={countdown.isActive}
-                  >
-                    {countdown.isActive ? 'Presale Not Started' : `BUY $DIMON with ${paymentMethod.toUpperCase()}`}
-                  </button>  
-                ) : (
-                  <ConnectButton label="Connect Wallet" />
+                {/* EVM address input for SOL payment */}
+                {selectedPaymentMethod === 'sol' && solanaIsConnected && (
+                  <div className="w-full">
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">BSC Wallet Address For Receive</label>
+                    <input
+                      type="text"
+                      value={evmAddress}
+                      onChange={e => {
+                        setEvmAddress(e.target.value);
+                        setEvmAddressError(validateEvmAddress(e.target.value));
+                      }}
+                      placeholder="Enter your BSC wallet address for receive $DIMON"
+                      className={`w-full border ${evmAddressError ? 'border-red-500' : 'border-gray-400'} rounded-lg py-2 px-3 text-black focus:outline-none focus:ring-1 focus:ring-[#005FF0]`}
+                    />
+                    {evmAddressError && (
+                      <p className="text-red-500 text-xs mt-1">{evmAddressError}</p>
+                    )}
+                  </div>
                 )}
+
+                {/* Wallet connection and buy button logic */}
+                {selectedPaymentMethod === 'bnb' ? (
+                  isConnected ? (
+                    <button
+                      type='button'
+                      className={`${countdown.isActive ? 'bg-gray-300 cursor-not-allowed' : 'bg-[#005FF0] hover:bg-[#005FF0]/90'} text-white rounded-md py-3 text-base font-bold`}
+                      onClick={handleBuy}
+                      disabled={countdown.isActive}
+                    >
+                      {countdown.isActive ? 'Presale Not Started' : `BUY $DIMON with BNB`}
+                    </button>
+                  ) : (
+                    <ConnectButton label="Connect Wallet" backgroundColor="bg-[#005FF0]" color="text-white" />
+                  )
+                ) : selectedPaymentMethod === 'sol' ? (
+                  solanaIsConnected ? (
+                    <button
+                      type='button'
+                      className={`${countdown.isActive || (selectedPaymentMethod === 'sol' && (!evmAddress || !!evmAddressError)) ? 'bg-gray-300 cursor-not-allowed' : 'bg-[#005FF0] hover:bg-[#005FF0]/90'} text-white rounded-md py-3 text-base font-bold`}
+                      onClick={handleBuy}
+                      disabled={countdown.isActive || (selectedPaymentMethod === 'sol' && (!evmAddress || !!evmAddressError))}
+                    >
+                      {countdown.isActive ? 'Presale Not Started' : `BUY $DIMON with SOL`}
+                    </button>
+                  ) : (
+                    <SolanaConnectButton label="Connect Solana Wallet" backgroundColor="#005FF0" color="white" />
+                  )
+                ) : null}
 
                 
                 {/* <div className="text-black self-center">
