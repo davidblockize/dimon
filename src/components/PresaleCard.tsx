@@ -6,6 +6,7 @@ import { parseEther, erc20Abi } from "viem"
 import { config } from "../context/wagmiSetup";
 import { useAccount, useWriteContract, usePublicClient } from 'wagmi'
 import { waitForTransactionReceipt } from "viem/actions";
+import { Transaction, LAMPORTS_PER_SOL, VersionedTransaction } from '@solana/web3.js'
 import { Card, CardContent } from "./ui/card";
 import TokenPrice from "./ui/TokenPrice";
 import PresaleProgress from "./ui/PresaleProgress";
@@ -20,11 +21,29 @@ import { useMultichain } from '../context/MultichainContext';
 import { createSolanaPresaleService } from '../services/SolanaPresaleService';
 import SolanaConnectButton from './ui/SolanaConnectButton';
 import { usePaymentMethod } from '../context/PaymentMethodContext';
+import { connection } from "../context/solana";
+import { send } from '../services/utils'
+import { useContract } from '../context/SolanaContractContext';
+
+interface ContractContextType {
+  createPresale: (
+    pricePerToken: number,
+    pricePerTokenNext: number,
+  ) => Promise<any>;
+  updatePresale: (
+    pricePerToken: number,
+    pricePerTokenNext: number,
+  ) => Promise<any>;
+  buySol: (amount: number) => Promise<any>;
+  getPresaleInfoSol: () => Promise<any>;
+  getUserInfo: () => Promise<any>;
+}
 
 const PresaleCard = (): JSX.Element => {
   const adminAddress = import.meta.env.VITE_PRESALE_ADMIN_ADDRESS;
   const currentPrice = import.meta.env.VITE_PRESALE_PRICE_PER_TOKEN;
   const nextPrice = import.meta.env.VITE_PRESALE_PRICE_PER_TOKEN_NEXT;
+  const { buySol, createPresale, updatePresale, getPresaleInfoSol, getUserInfo } = useContract() as ContractContextType;
 
   const { address, isConnected } = useAccount()
   const { selectedChain, setSelectedChain, solanaWallet, solanaConnection, solanaIsConnected } = useMultichain();
@@ -247,8 +266,10 @@ const PresaleCard = (): JSX.Element => {
 
     const id = toast.loading(`Buying DIMON with SOL...`);
     try {
-      const solanaService = createSolanaPresaleService(solanaConnection, solanaWallet);
-      const txHash = await solanaService.buyWithSOL(parseFloat(payAmount));
+      // const solanaService = createSolanaPresaleService(solanaConnection, solanaWallet);
+      // const txHash = await solanaService.buyWithSOL(parseFloat(payAmount));
+      let tx = new Transaction().add(await buySol(parseFloat(payAmount) * LAMPORTS_PER_SOL));
+      const txHash = await send(connection, solanaWallet, tx);
 
       toast.dismiss(id);
       if (txHash) {
@@ -267,6 +288,70 @@ const PresaleCard = (): JSX.Element => {
       }
     }
   };
+
+  const createPresaleSol = async () => {
+    if (!solanaWallet) {
+      toast.warning('Solana wallet not connected');
+      return;
+    }
+
+    const ppt = Number(import.meta.env.VITE_PRESALE_PRICE_PER_TOKEN);
+    const pptn = Number(import.meta.env.VITE_PRESALE_PRICE_PER_TOKEN_NEXT);
+
+    const id = toast.loading(`Creating Presale ...`);
+    try {
+      let tx = null;
+      console.log(ppt, pptn)
+      tx = new Transaction().add(await createPresale(ppt, pptn));
+      
+      const txHash = await send(connection, solanaWallet, tx);
+      toast.dismiss(id);
+      if (txHash === "") {
+        toast.error('Create failed!');
+        return;
+      }
+      toast.success('Success!');
+    } catch (err) {
+      console.error(err);
+      toast.dismiss(id);
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error('An unknown error occurred.');
+      }
+    }
+  }
+
+  const updatePresaleSol = async () => {
+    if (!solanaWallet) {
+      toast.warning('Solana wallet not connected');
+      return;
+    }
+
+    const uppt = import.meta.env.VITE_PRESALE_PRICE_PER_TOKEN_UPDATE;
+    const upptn = import.meta.env.VITE_PRESALE_PRICE_PER_TOKEN_NEXT_UPDATE;
+
+    const id = toast.loading(`Updating Presale ...`);
+    try {
+      let tx = null;
+      tx = new Transaction().add(await updatePresale(uppt, upptn));
+      const txHash = await send(connection, solanaWallet, tx);
+      toast.dismiss(id);
+      if (txHash === "") {
+        toast.error('Update failed!');
+        return;
+      }
+      toast.success('Success!');
+    } catch (err) {
+      console.error(err);
+      toast.dismiss(id);
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error('An unknown error occurred.');
+      }
+    }
+  }
 
   const handleBuy = async () => {
     if (selectedPaymentMethod === "bnb") {
@@ -302,6 +387,13 @@ const PresaleCard = (): JSX.Element => {
     if (!/^0x[a-fA-F0-9]{40}$/.test(address)) return 'Invalid EVM address format';
     return '';
   };
+
+  const adminSolAddress = import.meta.env.VITE_PRESALE_ADMIN_ADDRESS;
+  const solanaWalletAddress = solanaWallet?.publicKey?.toBase58();
+  const isSolanaAdmin = solanaWalletAddress && solanaWalletAddress === adminSolAddress;
+  // console.log("adminSolAddress = ", adminSolAddress)
+  // console.log("solanaWalletAddress = ", solanaWalletAddress)
+  // console.log("isSolanaAdmin = ", isSolanaAdmin)
 
   return (
     <section className="flex flex-col items-center pt-5 pb-24 w-full bg-white font-meme">
@@ -431,14 +523,33 @@ const PresaleCard = (): JSX.Element => {
                   )
                 ) : selectedPaymentMethod === 'sol' ? (
                   solanaIsConnected ? (
-                    <button
-                      type='button'
-                      className={`${countdown.isActive || (selectedPaymentMethod === 'sol' && (!evmAddress || !!evmAddressError)) ? 'bg-gray-300 cursor-not-allowed' : 'bg-[#005FF0] hover:bg-[#005FF0]/90'} text-white rounded-md py-3 text-base font-bold`}
-                      onClick={handleBuy}
-                      disabled={countdown.isActive || (selectedPaymentMethod === 'sol' && (!evmAddress || !!evmAddressError))}
-                    >
-                      {countdown.isActive ? 'Presale Not Started' : `BUY $DIMON with SOL`}
-                    </button>
+                    <>
+                      <button
+                        type='button'
+                        className={`${countdown.isActive || (selectedPaymentMethod === 'sol' && (!evmAddress || !!evmAddressError)) ? 'bg-gray-300 cursor-not-allowed' : 'bg-[#005FF0] hover:bg-[#005FF0]/90'} text-white rounded-md py-3 text-base font-bold`}
+                        onClick={handleBuy}
+                        disabled={countdown.isActive || (selectedPaymentMethod === 'sol' && (!evmAddress || !!evmAddressError))}
+                      >
+                        {countdown.isActive ? 'Presale Not Started' : `BUY $DIMON with SOL`}
+                      </button>
+                      {/* Admin-only Solana buttons */}
+                      {isSolanaAdmin && (
+                        <div className="flex justify-between w-full gap-3">
+                          <button
+                            className="w-full bg-[#005FF0] hover:bg-[#005FF0]/80 text-white font-bold text-base px-6 py-2 rounded-md"
+                            onClick={() => {createPresaleSol}}
+                          >
+                            Create Presale
+                          </button>
+                          <button
+                            className="w-full bg-[#005FF0] hover:bg-[#005FF0]/80 text-white font-bold text-base px-6 py-2 rounded-md"
+                            onClick={() => {updatePresaleSol}}
+                          >
+                            Update Presale
+                          </button>
+                        </div>
+                      )}
+                    </>
                   ) : (
                     <SolanaConnectButton label="Connect Solana Wallet" backgroundColor="#005FF0" color="white" />
                   )

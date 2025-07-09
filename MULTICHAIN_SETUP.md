@@ -45,7 +45,6 @@ VITE_PRESALE_PRICE_PER_TOKEN_NEXT=0.002
 VITE_SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
 VITE_SOLANA_PRESALE_PROGRAM_ID=your_solana_presale_program_id
 VITE_SOLANA_PRESALE_ADMIN_ADDRESS=your_solana_admin_address
-VITE_SOLANA_TOKEN_MINT_ADDRESS=your_solana_token_mint_address
 ```
 
 ### 2. Solana Program Setup
@@ -66,7 +65,6 @@ Replace the placeholder addresses in `SolanaPresaleService.ts`:
 ```typescript
 const SOLANA_PRESALE_PROGRAM_ID = new PublicKey('YOUR_PRESALE_PROGRAM_ID');
 const SOLANA_PRESALE_ADMIN_ADDRESS = new PublicKey('YOUR_PRESALE_ADMIN_ADDRESS');
-const SOLANA_TOKEN_MINT_ADDRESS = new PublicKey('YOUR_TOKEN_MINT_ADDRESS');
 ```
 
 ## Usage

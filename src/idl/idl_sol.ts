@@ -1,7 +1,7 @@
 import * as anchor from "@project-serum/anchor";
 export const IDL: anchor.Idl = {
   "version": "0.1.0",
-  "name": "token_presale",
+  "name": "dimon_presale",
   "constants": [
     {
       "name": "PRESALE_SEED",
@@ -24,27 +24,7 @@ export const IDL: anchor.Idl = {
           "isSigner": true
         },
         {
-          "name": "usdtMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "usdcMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "vault",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "usdcVault",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "usdtVault",
           "isMut": true,
           "isSigner": false
         },
@@ -66,27 +46,11 @@ export const IDL: anchor.Idl = {
       ],
       "args": [
         {
-          "name": "hardcapAmount",
-          "type": "u128"
-        },
-        {
           "name": "pricePerToken",
           "type": "u64"
         },
         {
           "name": "pricePerTokenNext",
-          "type": "u64"
-        },
-        {
-          "name": "startTime",
-          "type": "u64"
-        },
-        {
-          "name": "endTime",
-          "type": "u64"
-        },
-        {
-          "name": "claimTime",
           "type": "u64"
         },
         {
@@ -101,16 +65,6 @@ export const IDL: anchor.Idl = {
         {
           "name": "presaleInfo",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "usdtMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "usdcMint",
-          "isMut": false,
           "isSigner": false
         },
         {
@@ -134,87 +88,6 @@ export const IDL: anchor.Idl = {
           "type": "u64"
         },
         {
-          "name": "hardcapAmount",
-          "type": "u128"
-        },
-        {
-          "name": "startTime",
-          "type": "u64"
-        },
-        {
-          "name": "endTime",
-          "type": "u64"
-        },
-        {
-          "name": "claimTime",
-          "type": "u64"
-        },
-        {
-          "name": "identifier",
-          "type": "u8"
-        }
-      ]
-    },
-    {
-      "name": "depositToken",
-      "accounts": [
-        {
-          "name": "mintAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "fromAssociatedTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "fromAuthority",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "toAssociatedTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "presaleInfo",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "payer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        },
-        {
           "name": "identifier",
           "type": "u8"
         }
@@ -225,21 +98,6 @@ export const IDL: anchor.Idl = {
       "accounts": [
         {
           "name": "presaleInfo",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "mintAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "buyerTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "presaleTokenAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -293,365 +151,16 @@ export const IDL: anchor.Idl = {
         {
           "name": "quoteAmount",
           "type": "u64"
-        },
-        {
-          "name": "identifier",
-          "type": "u8"
-        }
-      ]
-    },
-    {
-      "name": "buyUsdc",
-      "accounts": [
-        {
-          "name": "presaleInfo",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "mintAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "buyerTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "presaleTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "usdcMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "presaleAuthority",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "userInfo",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "usdcAssociatedTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "usdcVault",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "buyer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "quoteAmount",
-          "type": "u64"
-        },
-        {
-          "name": "identifier",
-          "type": "u8"
-        }
-      ]
-    },
-    {
-      "name": "buyUsdt",
-      "accounts": [
-        {
-          "name": "presaleInfo",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "mintAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "buyerTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "presaleTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "usdtMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "presaleAuthority",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "userInfo",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "usdtAssociatedTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "usdtVault",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "buyer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "quoteAmount",
-          "type": "u64"
-        },
-        {
-          "name": "identifier",
-          "type": "u8"
-        }
-      ]
-    },
-    {
-      "name": "claimToken",
-      "accounts": [
-        {
-          "name": "mintAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "buyerTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "presaleTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "userInfo",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "presaleInfo",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "presaleAuthority",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "buyer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "identifier",
-          "type": "u8"
-        }
-      ]
-    },
-    {
-      "name": "withdrawToken",
-      "accounts": [
-        {
-          "name": "presaleTokenMintAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "buyerPresaleTokenAssociatedTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "presalePresaleTokenAssociatedTokenAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "presaleInfo",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "presaleAuthority",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "buyer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "identifier",
-          "type": "u8"
         }
       ]
     }
   ],
   "accounts": [
     {
-      "name": "PresaleInfo",
+      "name": "presaleInfo",
       "type": {
         "kind": "struct",
         "fields": [
-          {
-            "name": "hardcapAmount",
-            "type": "u128"
-          },
-          {
-            "name": "depositTokenAmount",
-            "type": "u64"
-          },
-          {
-            "name": "soldTokenAmount",
-            "type": "u64"
-          },
-          {
-            "name": "solAmount",
-            "type": "u128"
-          },
-          {
-            "name": "usdtAmount",
-            "type": "u128"
-          },
-          {
-            "name": "usdcAmount",
-            "type": "u128"
-          },
-          {
-            "name": "totalAmount",
-            "type": "u128"
-          },
-          {
-            "name": "startTime",
-            "type": "u64"
-          },
-          {
-            "name": "endTime",
-            "type": "u64"
-          },
-          {
-            "name": "claimTime",
-            "type": "u64"
-          },
-          {
-            "name": "usdtMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "usdcMint",
-            "type": "publicKey"
-          },
           {
             "name": "pricePerToken",
             "type": "u64"
@@ -673,14 +182,6 @@ export const IDL: anchor.Idl = {
             "type": "publicKey"
           },
           {
-            "name": "usdtVault",
-            "type": "publicKey"
-          },
-          {
-            "name": "usdcVault",
-            "type": "publicKey"
-          },
-          {
             "name": "pricePerTokenNext",
             "type": "u64"
           }
@@ -688,7 +189,7 @@ export const IDL: anchor.Idl = {
       }
     },
     {
-      "name": "UserInfo",
+      "name": "userInfo",
       "type": {
         "kind": "struct",
         "fields": [
@@ -703,17 +204,46 @@ export const IDL: anchor.Idl = {
           {
             "name": "buyTime",
             "type": "u64"
-          },
-          {
-            "name": "claimAmount",
-            "type": "u64"
-          },
-          {
-            "name": "claimTime",
-            "type": "u64"
           }
         ]
       }
+    }
+  ],
+  "events": [
+    {
+      "name": "TradeEvent",
+      "fields": [
+        {
+          "name": "user",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "tokenAmount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "solAmount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "timestamp",
+          "type": "i64",
+          "index": false
+        },
+        {
+          "name": "totalTokenBuyAmount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "totalUsdBuyAmount",
+          "type": "u128",
+          "index": false
+        }
+      ]
     }
   ],
   "errors": [

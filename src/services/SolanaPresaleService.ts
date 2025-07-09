@@ -1,3 +1,10 @@
+import {
+  Transaction,
+  LAMPORTS_PER_SOL,
+  Connection,
+  VersionedTransaction,
+} from '@solana/web3.js'
+import { AnchorWallet } from '@solana/wallet-adapter-react';
 // Simple Solana presale service without direct Solana imports
 // This will be enhanced once the Solana packages are properly configured
 
