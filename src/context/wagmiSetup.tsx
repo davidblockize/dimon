@@ -4,7 +4,7 @@ import { metaMaskWallet, coinbaseWallet, rainbowWallet, walletConnectWallet, tru
 import { createStorage, cookieStorage } from 'wagmi';
 import { createClient } from 'viem';
 import { http} from "viem"
-import { bscTestnet, sepolia} from 'wagmi/chains';
+import { bsc, bscTestnet, sepolia} from 'wagmi/chains';
 
 const connectors = connectorsForWallets(
   [
@@ -42,13 +42,17 @@ const connectors = connectorsForWallets(
 //     storage: cookieStorage,
 //   }),
 // })
+const IS_MAINNET = import.meta.env.VITE_PUBLIC_IS_MAINNET || "";
+const isMainNet = IS_MAINNET === "true";
 
 export const config = getDefaultConfig({
   appName: "DimonPresale",
   projectId: "293a761c6f1f8691938d803059c73e54",
-  chains: [bscTestnet],
+  chains: isMainNet ? [bsc] : [bscTestnet],
+  // chains: [bscTestnet],
   transports: {
-    [bscTestnet.id]: http("https://bnb-testnet.g.alchemy.com/v2/jJYJsns9CjkrmyIEsM2859AbB-d2cevE"),
+    [bsc.id]: http(import.meta.env.VITE_ENDPOINT_MAINNET),
+    [bscTestnet.id]: http(import.meta.env.VITE_ENDPOINT_TESTNET),
   },
   ssr: true,
   storage: createStorage({

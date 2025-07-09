@@ -10,8 +10,8 @@ import {
 import {
     WalletModalProvider,
 } from '@solana/wallet-adapter-react-ui';
-
 import "@solana/wallet-adapter-react-ui/styles.css";
+import { networkUrl } from './solana';
 
 interface SolanaWalletProviderProps {
     children: React.ReactNode;
@@ -21,8 +21,8 @@ export const SolanaWalletProvider: FC<SolanaWalletProviderProps> = ({ children }
     const network = WalletAdapterNetwork.Mainnet;
 
     // Use environment variable for endpoint or fallback to a public RPC
-    const endpoint = import.meta.env.VITE_SOLANA_RPC_URL || 
-        'https://api.mainnet-beta.solana.com';
+    // const endpoint = import.meta.env.VITE_SOLANA_RPC_URL || 
+    //     'https://api.mainnet-beta.solana.com';
 
     const wallets = useMemo(
         () => [
@@ -34,7 +34,7 @@ export const SolanaWalletProvider: FC<SolanaWalletProviderProps> = ({ children }
     );
 
     return (
-        <ConnectionProvider endpoint={endpoint}>
+        <ConnectionProvider endpoint={networkUrl}>
             <WalletProvider wallets={wallets} autoConnect>
                 <WalletModalProvider>
                     {children}
